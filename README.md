@@ -1,10 +1,3 @@
-Here is the complete, publication-grade **`README.md`** for your **`sentinel-lab`** repository. 
-
-It is structured to satisfy the rigorous criteria of **Artifact Evaluation Committees** at top-tier systems and security conferences (*USENIX Security, ACM CCS, NDSS, and SOSP*), while functioning as a turnkey experimental testbed for your Master's thesis.
-
----
-
-```markdown
 # Sentinel-Lab: Reproducible Line-Rate Testbed for In-Datapath Encrypted Traffic Analysis
 
 [![Artifact Evaluated](https://img.shields.io/badge/Artifact-Evaluated-red.svg)](https://www.usenix.org/conference/usenixsecurity24/call-for-artifacts)
@@ -418,5 +411,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-```
 ```
