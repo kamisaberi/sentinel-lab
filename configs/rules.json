@@ -1,0 +1,16 @@
+{
+  "benchmark_rules": [
+    {
+      "id": "RULE-01",
+      "name": "High Anomaly Score Kernel Drop",
+      "threshold": 0.85,
+      "action": "XDP_DROP"
+    },
+    {
+      "id": "RULE-02",
+      "name": "Medium Anomaly Log Only",
+      "threshold": 0.65,
+      "action": "LOG_METRIC"
+    }
+  ]
+}
