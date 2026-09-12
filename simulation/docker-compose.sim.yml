@@ -1,0 +1,53 @@
+services:
+  # Simulated Linux Client Server (Streaming Syslog)
+  sim-ubuntu-server:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM ubuntu:22.04
+        ENV DEBIAN_FRONTEND=noninteractive
+        RUN apt-get update -qq && apt-get install -y -qq rsyslog net-tools curl netcat-openbsd && rm -rf /var/lib/apt/lists/*
+    container_name: sim-ubuntu-server
+    networks:
+      sentinel_lab_net:
+        ipv4_address: 172.30.0.10
+    command: >
+      sh -c "echo '*.* @172.30.0.1:514' >> /etc/rsyslog.conf &&
+             rsyslogd &&
+             logger 'Sentinel-Lab Client Online' &&
+             sleep infinity"
+
+  # Simulated Industrial SCADA Modbus PLC (Port 502)
+  sim-scada-plc:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM python:3.10-slim
+        RUN pip install --no-cache-dir pymodbus
+    container_name: sim-scada-plc
+    networks:
+      sentinel_lab_net:
+        ipv4_address: 172.30.0.20
+    command: >
+      python3 -c "from pymodbus.server import StartTcpServer; print('Modbus PLC Active on Port 502'); StartTcpServer(context=None, address=('0.0.0.0', 502))"
+
+  # Simulated Adversary Attacker Container
+  sim-attacker:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM ubuntu:22.04
+        ENV DEBIAN_FRONTEND=noninteractive
+        RUN apt-get update -qq && apt-get install -y -qq nmap hping3 curl netcat-openbsd && rm -rf /var/lib/apt/lists/*
+    container_name: sim-attacker
+    networks:
+      sentinel_lab_net:
+        ipv4_address: 172.30.0.250
+    command: sleep infinity
+
+networks:
+  sentinel_lab_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
