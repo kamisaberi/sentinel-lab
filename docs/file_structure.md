@@ -1,138 +1,237 @@
-Based on the structure of **`blackbox-sentinel`** (with its 26 modules, 30 commercial plugins, air-gapped web center, and TPM licensing), **`sentinel-lab`** must be a streamlined, research-grade evaluation artifact.
+Here is the recommended, production-ready repository architecture for **`sentinel-lab`** (`https://github.com/kamisaberi/sentinel-lab`).
 
-In academic computer systems and security venues (*USENIX Security, NDSS, ACM CCS, SOSP*), a research testbed must satisfy the **Artifact Evaluation (AE)** standard: it must be **reproducible, plug-and-play, decoupled from proprietary commercial code, and focused squarely on measuring scientific metrics**.
-
----
-
-### Architectural Contrast: `blackbox-sentinel` vs. `sentinel-lab`
-
-```text
-BLACKBOX-SENTINEL (Commercial Product Appliance)
-├── 26 Subsystem Modules (WAF, EDR, RASP, CWPP, SIEM Core, UEBA, etc.)
-├── 30 Dynamic Plugins (SCADA Modbus, S7comm, MAVLink, BACnet, AIS, etc.)
-├── Embedded Web Dashboard (Port 8443) & WebSocket Streamer (Port 8444)
-└── Hardware TPM 2.0 Licensing Engine & CMMC/ISO Compliance Exporter
-                                vs.
-SENTINEL-LAB (Academic Evaluation Testbed & Artifact)
-├── Zero-Copy Ingestion Core (AF_XDP UMEM C++20 Datapath)
-├── Temporal Flow Vectorizer (First 16 Packets: Burst Size, IAT Delta)
-├── Linkage to `libblackbox-essential.so` -> `libxinfer.so`
-├── Automated Multi-Model Benchmarking Harness (SpectraFlow vs. Baselines)
-├── Traffic Replayer & High-Concurrency Rate Generator (10k to 1.25M EPS)
-└── Automated LaTeX Table & Matplotlib Figure Generation (One-Click Evaluation)
-```
+`sentinel-lab` serves as the **open-source academic research platform and reproducible benchmark testbed** (supporting **Intel OpenVINO** and **NVIDIA TensorRT**). It is designed so that Master's/PhD students, professors, and cybersecurity researchers can clone it, drop in their ONNX models, and immediately measure microsecond-level latency and line-rate throughput under live attack traffic.
 
 ---
 
-### Recommended File Structure for `sentinel-lab`
+### Complete Repository Structure for `sentinel-lab`
 
 ```text
 sentinel-lab/
-├── CMakeLists.txt                       # Build script linking libblackbox-essential & libxinfer
-├── LICENSE                              # Open-Source License (e.g., Apache 2.0 or MIT)
-├── README.md                            # Academic Overview, Badges, and Quickstart
-├── INSTALL.md                           # Step-by-step Artifact Evaluation Setup Guide
+├── CMakeLists.txt                    # Root CMake build configuration (OpenVINO + TensorRT)
+├── LICENSE                           # Open-Source License (Apache 2.0 or MIT)
+├── README.md                         # Academic & Research documentation
+├── paper.tex                         # Full-width single-column academic preprint paper
 │
-├── bpf/                                 # In-Kernel eBPF / XDP Datapath
-│   ├── CMakeLists.txt
-│   ├── xdp_drop.c                       # Wire-speed packet dropper hook
-│   ├── bpf_common.h                     # BPF map definitions (blocked_ip_map)
-│   └── Makefile                         # Clang bytecode compilation target
+├── configs/                          # Research & Evaluation Configurations
+│   ├── sentinel_lab.json             # Main lab testbed configuration
+│   ├── rules.json                    # Benchmark detection and correlation rules
+│   └── models.json                   # Pre-configured Hugging Face / ONNX Model Zoo URLs
 │
-├── include/                             # Public C++20 Headers
-│   └── sentinel_lab/
-│       ├── lab_engine.hpp               # Master testbed coordinator
-│       ├── af_xdp_socket.hpp            # Zero-copy UMEM & AF_XDP ring buffer wrapper
-│       ├── flow_vectorizer.hpp          # Extracts (d_i * s_i, Delta t_i) for N=16 packets
-│       ├── traffic_replayer.hpp         # High-precision line-rate packet replay engine
-│       ├── benchmark_harness.hpp        # Profiles model inference, latency & memory
-│       └── metrics_collector.hpp        # Lock-free P50/P95/P99 latency & EPS counters
+├── include/
+│   └── sentinel_lab/                 # Public C++20 Research Framework Headers
+│       ├── sentinel_lab.hpp          # Master library include header
+│       ├── engine.hpp                # OpenVINO & TensorRT inference wrapper
+│       ├── ebpf_filter.hpp           # Safe eBPF / XDP kernel packet filter harness
+│       ├── benchmarker.hpp           # High-resolution latency (P50/P95/P99) & EPS calculator
+│       ├── event.hpp                 # Standardized SecurityEvent data structure
+│       └── ring_buffer.hpp           # Lock-free in-memory event queue
 │
-├── src/                                 # Implementation Source Files
-│   ├── main.cpp                         # CLI executable entry point (sentinel-lab-cli)
-│   ├── lab_engine.cpp                   # Testbed execution orchestration
-│   ├── af_xdp_socket.cpp                # Native Linux XDP socket driver implementation
-│   ├── flow_vectorizer.cpp              # Zero-allocation flow state tracking & tensor packing
-│   ├── traffic_replayer.cpp             # Wire-speed PCAP injection pipeline
-│   ├── benchmark_harness.cpp            # Model execution loop via blackbox-essential
-│   └── metrics_collector.cpp            # Thread-safe timing and percentile calculations
+├── src/                              # C++20 Testbed Implementation Source
+│   ├── main.cpp                      # Sentinel-Lab daemon entry point
+│   ├── engine.cpp                    # Inference dispatch (OpenVINO CPU/NPU + TensorRT GPU)
+│   ├── ebpf_filter.cpp               # eBPF XDP bytecode loader & BPF map manager
+│   ├── benchmarker.cpp               # Microsecond latency distribution analyzer
+│   ├── network_ingest.cpp            # Raw socket / PCAP replay / test packet receiver
+│   └── rest_api.cpp                  # Embedded HTTP server for real-time telemetry
 │
-├── configs/                             # Experiment Configurations
-│   ├── lab_config.json                  # NIC interface, batch size, thread pinning
-│   └── experiments/
-│       ├── exp1_accuracy.json           # Accuracy validation across datasets
-│       ├── exp2_latency.json            # Sub-microsecond latency measurement setup
-│       └── exp3_throughput_10g.json     # 10Gbps line-rate stress test configuration
+├── bpf/                              # Native eBPF Kernel C Code
+│   ├── xdp_filter.c                  # Kernel-level packet filter & BPF hash map
+│   └── build_bpf.sh                  # Clang BPF bytecode compilation script
 │
-├── models/                              # Pre-trained ONNX Models & Baselines
-│   ├── README.md                        # Checkpoint hashes, training configs & weights
-│   ├── spectraflow_cst.onnx             # Proposed Compact Sequence Transformer (<450k params)
-│   └── baselines/
-│       ├── fsnet_gru.onnx               # Recurrent Baseline (Bi-GRU)
-│       ├── 1d_cnn_wang.onnx             # Convolutional Baseline (1D-CNN)
-│       ├── flowpic_resnet.onnx          # Visual FlowPic Baseline (2D-CNN)
-│       └── nettisa_mlp.onnx             # Fast Statistical Baseline (NetTiSA MLP)
+├── models/                           # Local ONNX Model Cache (Auto-fetched via ModelHub)
+│   └── README.md                     # Instructions on supported ONNX models
 │
-├── datasets/                            # Dataset Ingestion & Preprocessing
-│   ├── download_datasets.sh             # Automated script to fetch USTC, CIRA-DoH, CTU-13
-│   ├── verify_checksums.sh              # Validates dataset integrity via SHA-256
-│   └── sample_traces/                   # Minimal sample PCAPs for rapid CI testing
-│       ├── sample_benign_tls13.pcap
-│       └── sample_cobalt_strike_c2.pcap
+├── simulation/                       # Turnkey Multi-Device Docker Simulation Network
+│   ├── docker-compose.sim.yml        # Multi-container network (Web cluster, SCADA, Attacker)
+│   ├── simulate_attack.sh            # One-shot attack verification script
+│   └── attack_console.py             # Interactive Python attack control panel
 │
-├── evaluation/                          # Automated Thesis / Paper Figure & Table Exporters
-│   ├── run_all_experiments.sh           # One-click Master's artifact evaluation runner
-│   ├── plot_latency_cdf.py              # Generates Figure: Latency Percentile CDF (0.12 - 1.05 us)
-│   ├── plot_throughput_scaling.py       # Generates Table: Sustained EPS vs. CPU/RAM Footprint
-│   └── generate_confusion_matrices.py   # Generates Table: Precision, Recall, F1-Score per class
+├── tools/                            # Python Research & Dataset Utility Scripts
+│   ├── train_cicids2017.py           # Real CIC-IDS-2017 dataset downloader & ONNX trainer
+│   ├── export_yolo.py                # Official YOLOv11n export script
+│   ├── evaluate_benchmark.py         # Pulls metrics from API & plots latency/ROC figures
+│   └── requirements.txt              # Python research dependencies
 │
-├── deploy/                              # Environment Setup & Virtual Testbeds
-│   ├── Dockerfile                       # Self-contained container (Ubuntu 24.04, clang-18, libbpf)
-│   ├── docker-compose.yml               # Two-node virtual network (Traffic Generator <-> Sentinel-Lab)
-│   └── setup_veth_testbed.sh            # Virtual kernel network setup (for laptops without 10GbE NICs)
-│
-└── tests/                               # Test Suite
-    ├── CMakeLists.txt
-    ├── test_af_xdp.cpp                  # Validates kernel driver binding and UMEM allocations
-    ├── test_flow_vectorizer.cpp         # Verifies 16-packet tensor extraction against ground truth
-    └── test_blackbox_linkage.cpp        # Verifies integration with libblackbox-essential.so
+└── tests/                            # CTest Research Verification Suite
+    ├── CMakeLists.txt                # Tests build script
+    ├── test_inference.cpp            # OpenVINO/TensorRT inference unit test
+    ├── test_ebpf.cpp                 # XDP filter attach/detach test
+    └── test_benchmarker.cpp          # Metric precision and statistical test
 ```
 
 ---
 
-### Key Components Explained
+### Key Components to Put in Place First
 
-#### 1. `bpf/xdp_drop.c` (The Hardware Enforcer)
-This is the minimal, stripped-down eBPF program that compiles into `xdp_drop.o`. It contains only:
-* The `blocked_ip_map` (a BPF hash table), and
-* The XDP packet hook that checks incoming IPv4 source addresses and returns `XDP_DROP` if matched, or `XDP_PASS` if clean.
+#### 1. Root `CMakeLists.txt`
+This root build file focuses on **OpenVINO** (default ON for CPU/NPU) and **TensorRT** (optional for NVIDIA GPUs):
 
-#### 2. `include/sentinel_lab/flow_vectorizer.hpp` (The Feature Extractor)
-Implements your mathematical tensor extraction:
-* Maintains a pre-allocated, fixed-size flow table in memory.
-* For each observed 5-tuple, stores up to 16 packet events: $\mathbf{p}_i = [d_i \cdot s_i, \; \ln(\Delta t_i + 1.0)]$.
-* Once the 16th packet is observed, passes the pointer directly to `libblackbox-essential.so` without intermediate memory allocations.
+```cmake
+cmake_minimum_required(VERSION 3.20)
+project(sentinel-lab VERSION 1.0.0 LANGUAGES CXX C)
 
-#### 3. `src/benchmark_harness.cpp` (The Model Profiler)
-Calls the inference method exposed by `libblackbox-essential.so` (which calls `libxinfer.so`). It runs through your model collection:
-1. `spectraflow_cst.onnx`
-2. `fsnet_gru.onnx`
-3. `1d_cnn_wang.onnx`
-4. `nettisa_mlp.onnx`
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-It automatically calculates timing per pass using the CPU's high-resolution invariant time-stamp counter (`rdtsc`), outputting the **Min, Mean, P95, and P99 latency percentiles**.
+# Research Hardware Toggles (Default: OpenVINO ON, TensorRT optional)
+option(ENABLE_OPENVINO "Enable Intel OpenVINO Backend (CPU/NPU)" ON)
+option(ENABLE_TENSORRT "Enable NVIDIA TensorRT Backend (GPU)"     OFF)
+option(BUILD_TESTS     "Build unit tests and benchmarks"          ON)
 
-#### 4. `evaluation/run_all_experiments.sh` (The Artifact Badge Guarantee)
-Top academic conferences award artifact badges (**Artifact Available**, **Artifact Evaluated**, **Results Reproduced**). Having a single script that runs the experiments, parses the log files, and produces the exact LaTeX tables and PDF graphs for your paper is what distinguishes an elite systems dissertation from standard student projects.
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    /usr/local/include
+)
 
-#### 5. `deploy/setup_veth_testbed.sh` (Portability)
-Not every reviewer or university professor testing your code will have an Intel X520 10GbE dual-port network card in their workstation. This script sets up a simulated kernel testbed using Linux `veth` (virtual Ethernet) pairs with XDP driver emulation, allowing `sentinel-lab` to be tested on standard laptops and GitHub CI runners.
+# Core System Dependencies
+find_package(Threads REQUIRED)
+find_library(BPF_LIB bpf REQUIRED)
+find_library(ELF_LIB elf REQUIRED)
+find_library(XINFER_LIB xinfer REQUIRED PATHS /usr/local/lib /usr/lib)
+find_library(BLACKBOX_LIB blackbox REQUIRED PATHS /usr/local/lib /usr/lib)
+
+set(LAB_SOURCES
+    src/main.cpp
+    src/engine.cpp
+    src/ebpf_filter.cpp
+    src/benchmarker.cpp
+    src/network_ingest.cpp
+    src/rest_api.cpp
+)
+
+if(ENABLE_OPENVINO)
+    add_compile_definitions(SENTINEL_LAB_OPENVINO)
+    find_package(OpenVINO REQUIRED)
+endif()
+
+if(ENABLE_TENSORRT)
+    enable_language(CUDA)
+    add_compile_definitions(SENTINEL_LAB_TENSORRT)
+    find_package(CUDA REQUIRED)
+    find_library(TENSORRT_NVINFER nvinfer REQUIRED)
+    include_directories(${CUDA_INCLUDE_DIRS})
+endif()
+
+add_executable(sentinel_lab ${LAB_SOURCES})
+
+target_link_libraries(sentinel_lab PRIVATE
+    Threads::Threads
+    ${BPF_LIB}
+    ${ELF_LIB}
+    z
+    ${XINFER_LIB}
+    ${BLACKBOX_LIB}
+)
+
+if(ENABLE_OPENVINO)
+    target_link_libraries(sentinel_lab PRIVATE openvino::runtime)
+endif()
+
+if(ENABLE_TENSORRT)
+    target_link_libraries(sentinel_lab PRIVATE ${CUDA_LIBRARIES} ${TENSORRT_NVINFER})
+endif()
+
+if(BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+```
 
 ---
 
-### How It Fits into Your Workflow
+#### 2. Master Research `README.md` for GitHub
 
-1. **`xinfer`:** You build and test the universal AI runtime (ONNX + OpenVINO/TensorRT).
-2. **`blackbox-essential`:** You build the security engine (flow management, model registry, eBPF drop mapping).
-3. **`sentinel-lab`:** You build this research testbed repository to execute your experimental benchmarks and generate the data for your Master's thesis.
-4. **`blackbox-sentinel`:** You keep as your proprietary commercial platform, integrating the proven SpectraFlow engine into your enterprise appliance.
+```markdown
+# Sentinel-Lab: Academic Cyber-Physical Threat Mitigation Testbed
+
+Sentinel-Lab is an open-source research platform and reproducible benchmarking testbed designed for evaluating machine learning intrusion detection models under real-time, line-rate network execution. 
+
+Built in native C++20 and powered by Linux kernel eBPF/XDP and the `xinfer` engine, Sentinel-Lab allows researchers and students to evaluate ONNX deep learning models on live packet streams and measure true microsecond-level detection and packet-drop latencies.
+
+## Core Capabilities
+- **Universal Inference Support:** Native hardware execution on commodity CPUs and Intel NPUs via OpenVINO, with optional NVIDIA TensorRT acceleration.
+- **Kernel-Level eBPF/XDP Mitigation:** Drops malicious packets at the network interface driver level in nanoseconds.
+- **Turnkey Simulation Testbed:** 12-container Docker network simulating enterprise servers, SCADA Modbus PLCs, and active multi-vector attackers.
+- **Reproducible Academic Benchmarking:** Computes high-precision latency percentiles (Min, Mean, P95, P99) and sustained throughput (Events Per Second).
+
+## Academic Preprint Paper
+A complete academic paper detailing the testbed architecture, eBPF implementation, and comparative benchmarks against legacy SIEM platforms is included in `paper.tex`.
+
+## Quickstart Guide
+
+### 1. Install Prerequisites (Ubuntu 22.04 / 24.04 LTS)
+```bash
+sudo apt-get update && sudo apt-get install -y \
+    build-essential cmake clang llvm libbpf-dev libelf-dev zlib1g-dev \
+    openvino-2024.0.0 curl wget python3-pip
+```
+
+### 2. Build the Platform
+```bash
+mkdir build && cd build
+cmake .. -DENABLE_OPENVINO=ON
+make -j$(nproc)
+```
+
+### 3. Run the Testbed & Simulation
+```bash
+# Terminal 1: Launch the research daemon
+sudo ./sentinel_lab
+
+# Terminal 2: Launch the interactive attack simulation
+cd simulation
+sudo docker compose -f docker-compose.sim.yml up -d
+sudo python3 attack_console.py
+```
+
+## Citation
+If you use Sentinel-Lab in your research, Master's thesis, or publication, please cite:
+```bibtex
+@article{saberifard2026sentinel,
+  title={Sub-Millisecond Cyber-Physical Threat Mitigation: An Autonomous Air-Gapped Active Defense Architecture Powered by eBPF and Edge NPU Runtimes},
+  author={Saberifard, Kamran},
+  journal={arXiv preprint},
+  year={2026}
+}
+```
+
+## License
+Licensed under the Apache License, Version 2.0.
+```
+
+---
+
+### Step-by-Step Commands to Initialize Your Repository
+
+Open your terminal on your Ubuntu machine to set up the local repository and push it to GitHub:
+
+```bash
+# 1. Clone your empty repository from GitHub
+cd /home/kami
+git clone https://github.com/kamisaberi/sentinel-lab.git
+cd sentinel-lab
+
+# 2. Create the complete directory structure
+mkdir -p configs include/sentinel_lab src bpf models simulation tools tests
+
+# 3. Create the placeholder files
+touch CMakeLists.txt README.md LICENSE paper.tex
+touch configs/sentinel_lab.json configs/rules.json configs/models.json
+touch bpf/xdp_filter.c bpf/build_bpf.sh
+touch simulation/docker-compose.sim.yml simulation/simulate_attack.sh simulation/attack_console.py
+touch tools/train_cicids2017.py tools/export_yolo.py tools/evaluate_benchmark.py tools/requirements.txt
+touch tests/CMakeLists.txt tests/test_inference.cpp tests/test_ebpf.cpp tests/test_benchmarker.cpp
+
+# 4. Copy your paper.tex into the root
+cp /home/kami/blackbox-sentinel/paper.tex ./paper.tex
+
+# 5. Commit and push your initial structure
+git add .
+git commit -m "Initialize Sentinel-Lab research testbed architecture"
+git branch -M main
+git push -u origin main
+```
+
+Your repository will be structured, clearly separated from the commercial product, and ready for you to add code.
