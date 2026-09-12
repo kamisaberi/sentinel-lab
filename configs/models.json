@@ -1,0 +1,31 @@
+{
+  "registry": [
+    {
+      "name": "network_threat.onnx",
+      "domain": "Network Flow Intrusion",
+      "architecture": "Deep Autoencoder / MLP",
+      "input_shape": [1, 32],
+      "input_name": "input",
+      "output_name": "scores",
+      "url": "https://huggingface.co/darkknight25/ddos_xgboost_onnx/resolve/main/ddos_detection_model.onnx"
+    },
+    {
+      "name": "vision_yolo.onnx",
+      "domain": "Physical Perimeter Intrusion",
+      "architecture": "YOLOv11n",
+      "input_shape": [1, 3, 640, 640],
+      "input_name": "images",
+      "output_name": "output0",
+      "url": "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8n.onnx"
+    },
+    {
+      "name": "version-RFB-320.onnx",
+      "domain": "Facial Access Control",
+      "architecture": "UltraFace RFB-320",
+      "input_shape": [1, 3, 240, 320],
+      "input_name": "input",
+      "output_name": "scores",
+      "url": "https://github.com/onnx/models/raw/main/validated/vision/body_analysis/ultraface/models/version-RFB-320.onnx"
+    }
+  ]
+}
