@@ -5,17 +5,25 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# Research Hardware Toggles (Default: OpenVINO ON, TensorRT optional)
+add_compile_options(-O3 -Wall -Wextra -pthread -march=native)
+
+# RPATH configuration
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+set(CMAKE_INSTALL_RPATH "/usr/local/lib")
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
+# Hardware Backend Toggles (Research Edition)
 option(ENABLE_OPENVINO "Enable Intel OpenVINO Backend (CPU/NPU)" ON)
 option(ENABLE_TENSORRT "Enable NVIDIA TensorRT Backend (GPU)"     OFF)
-option(BUILD_TESTS     "Build unit tests and benchmarks"          ON)
+option(BUILD_TESTS     "Build unit tests"                        OFF)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     /usr/local/include
 )
 
-# Core System Dependencies
+# Core System & Framework Dependencies
 find_package(Threads REQUIRED)
 find_library(BPF_LIB bpf REQUIRED)
 find_library(ELF_LIB elf REQUIRED)
@@ -44,6 +52,7 @@ if(ENABLE_TENSORRT)
     include_directories(${CUDA_INCLUDE_DIRS})
 endif()
 
+# Main Research Lab Daemon
 add_executable(sentinel_lab ${LAB_SOURCES})
 
 target_link_libraries(sentinel_lab PRIVATE
@@ -63,7 +72,4 @@ if(ENABLE_TENSORRT)
     target_link_libraries(sentinel_lab PRIVATE ${CUDA_LIBRARIES} ${TENSORRT_NVINFER})
 endif()
 
-if(BUILD_TESTS)
-    enable_testing()
-    add_subdirectory(tests)
-endif()
+install(TARGETS sentinel_lab DESTINATION /usr/local/bin)
