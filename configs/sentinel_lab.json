@@ -1,0 +1,24 @@
+{
+  "testbed": {
+    "node_id": "sentinel-lab-workstation",
+    "http_api_port": 8443,
+    "ingest_port": 9000,
+    "network_interface": "ens33"
+  },
+  "inference": {
+    "backend": "OpenVINO",
+    "model_path": "models/network_threat.onnx",
+    "input_tensor_name": "input",
+    "output_tensor_name": "scores",
+    "anomaly_threshold": 0.85
+  },
+  "ebpf": {
+    "bpf_obj_path": "bpf/xdp_filter.o",
+    "auto_drop_enabled": true
+  },
+  "benchmarking": {
+    "warmup_iterations": 100,
+    "default_benchmark_events": 50000,
+    "export_csv_path": "benchmark_results.csv"
+  }
+}
