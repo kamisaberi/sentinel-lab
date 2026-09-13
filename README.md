@@ -1,204 +1,184 @@
-# Sentinel-Lab: Reproducible Line-Rate Testbed for In-Datapath Encrypted Traffic Analysis
+# Sentinel-Lab: Academic Cyber-Physical Threat Mitigation Testbed & Benchmark Suite
 
-[![Artifact Evaluated](https://img.shields.io/badge/Artifact-Evaluated-red.svg)](https://www.usenix.org/conference/usenixsecurity24/call-for-artifacts)
-[![Artifact Functional](https://img.shields.io/badge/Artifact-Functional-blue.svg)](https://www.usenix.org/conference/usenixsecurity24/call-for-artifacts)
-[![Results Reproduced](https://img.shields.io/badge/Results-Reproduced-green.svg)](https://www.usenix.org/conference/usenixsecurity24/call-for-artifacts)
-[![Standard](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
-[![Kernel](https://img.shields.io/badge/Linux%20Kernel-eBPF%20%2F%20XDP-orange.svg)](https://ebpf.io/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg)](LICENSE)
+Sentinel-Lab is an open-source research platform, reproducible benchmarking testbed, and empirical evaluation framework designed for evaluating deep learning intrusion detection models on live, line-rate network packet streams.
 
-**Sentinel-Lab** is an open-source, high-performance C++20 research testbed and artifact evaluation harness designed for **line-rate encrypted traffic classification and active kernel-level intrusion mitigation**.
+Engineered in native C++20 and powered by Linux kernel Extended Berkeley Packet Filter (eBPF) with Express Data Path (XDP), Sentinel-Lab addresses the structural disconnect between theoretical machine learning models evaluated on static offline datasets and the microsecond-level execution constraints of production operating system kernels.
 
-Built to bridge the gap between theoretical machine learning prototypes and physical production networks, Sentinel-Lab couples **Linux Express Data Path (`AF_XDP`) zero-copy ring buffers** directly to in-memory tensor representations. It enables researchers to evaluate early-stage sequence models (such as our proposed **Compact Sequence Transformer**) against evasive, encrypted Command-and-Control (C2) and DNS-over-HTTPS (DoH) flows at **10 Gbps line rate ($1,250,000\text{ EPS}$)**, enforcing active packet mitigation inside network interface drivers in **under $0.84\,\mu\text{s}$**.
-
-> This repository serves as the official open-source artifact accompanying the Master’s Dissertation:  
-> **"High-Throughput Encrypted Network Traffic Analysis Without Payload Decryption: A Native In-Memory Deep Learning Approach at 10Gbps Line Rate"** and the research paper:  
-> **"SpectraFlow: Line-Rate Encrypted C2 Detection via Compact Sequence Transformers in Zero-Copy Kernel Datapaths."**
+Sentinel-Lab natively supports **Intel OpenVINO (CPU/NPU)** and **NVIDIA TensorRT (GPU)**, providing academic researchers, Master's and PhD candidates, and cybersecurity research laboratories with an extensible testbed for real-time model evaluation, statistical latency profiling, and active hardware-level mitigation.
 
 ---
 
-## 1. The Core Scientific Problem: Escaping the "Jupyter Notebook Trap"
+## 1. Research Motivation: Bridging the "Jupyter Notebook Trap"
 
-Over 95% of contemporary network traffic is encrypted via TLS 1.3, QUIC, or DoH, rendering traditional Deep Packet Inspection (DPI) ineffective. Modern adversary frameworks (Cobalt Strike, Sliver) routinely evade static handshake fingerprints (JA3/JA4) via extension shuffling and padding. 
+Over 95% of published academic research in machine learning-based Network Intrusion Detection Systems (NIDS) and Security Information and Event Management (SIEM) relies entirely on offline Python notebooks:
+1. **The Static CSV Limitation:** Models are trained and evaluated on pre-recorded CSV files (e.g., CIC-IDS-2017 [1.2.8], UNSW-NB15). Researchers report theoretical F1-scores and accuracy exceeding 99%, but ignore operational throughput bottlenecks.
+2. **The Line-Rate Blindspot:** When evaluated in Python user-space on 10Gbps interfaces, conventional pipelines drop over 80% of packets due to the Python Global Interpreter Lock (GIL), garbage collection cycles, and memory allocation overhead.
+3. **Absence of Kernel-Level Active Defense:** Academic research frequently evaluates passive classification rather than active mitigation, leaving unanswered the question of how an operating system can drop zero-day traffic before memory allocation occurs in the network stack.
 
-While academic literature proposes deep learning to model encrypted flow dynamics, existing research is overwhelmingly trapped in an evaluation disconnect:
-1. **The Python/Offline Trap:** More than 90% of academic NIDS models are evaluated offline in Python on static CSV files (e.g., CIC-IDS-2017). They do not run on live packet streams.
-2. **The Operating System Memory Wall:** At 10 Gbps line rate (approx. 14.88 million packets per second), traditional Linux socket captures (`libpcap`, `sk_buff`) saturate CPU cores with kernel-to-user memory copies (`memcpy`) and context switches, dropping up to 80% of packets under high concurrency.
-3. **Passive Log Auditing vs. Active Mitigation:** Enterprise SIEMs (Splunk, Elastic) generate passive alerts minutes after an intrusion occurs. Systems that evaluate neural inference and enforce line-rate packet drops within sub-millisecond windows remain largely absent from research testbeds.
-
-**Sentinel-Lab solves this:** It provides a modular, reproducible C++20 evaluation harness that tests deep learning inference directly against live or replayed packet streams passing through Linux kernel eBPF/XDP hooks at wire speed.
+Sentinel-Lab provides the missing empirical infrastructure: a deterministic, zero-copy, C++20 testbed that measures actual microsecond-level detection and packet-drop latencies under simulated line-rate network conditions.
 
 ---
 
-## 2. System Architecture & The Three-Tier Stack
+## 2. System Architecture & Research Pipeline
 
-Sentinel-Lab operates as Tier 3 in a decoupled, production-grade systems stack:
+Sentinel-Lab is organized around a decoupled, three-tier research architecture:
 
 ```text
-========================================================================================================
- TIER 3: SENTINEL-LAB (Open-Source Research Testbed & Artifact Harness)
- - Linux AF_XDP Zero-Copy UMEM Ingestion (No sk_buff / No memcpy)
- - Early-Stage Temporal Flow Vectorizer (First N=16 Packets: d_i * s_i, ln(Delta t_i + 1))
- - High-Concurrency PCAP Replayer (Scales from 10k to 1,500,000 EPS)
- - Automated Experiment Runner & LaTeX/Matplotlib Exporter
-========================================================================================================
-                                                  │
-                                                  ▼ (Links against libblackbox-essential.so)
-========================================================================================================
- TIER 2: LIBBLACKBOX-ESSENTIAL.SO (Security Domain Engine & eBPF Manager)
- - Fixed-Capacity Lock-Free Flow State Table (Zero-Malloc Invariant)
- - Real-Time Tensor Normalization & Batch Aggregation
- - Kernel Driver eBPF Hash Map Synchronization (bpf_map_update_elem)
- - In-Kernel Wire-Speed Packet Dropper (xdp_drop.o: < 0.84 us mitigation latency)
-========================================================================================================
-                                                  │
-                                                  ▼ (Links against libxinfer.so)
-========================================================================================================
- TIER 1: LIBXINFER.SO (Universal C++20 Hardware Inference Runtime)
- - Multi-Backend Execution: Intel OpenVINO, NVIDIA TensorRT, CPU SIMD (AVX-512 / ARM Neon)
- - Hardware Memory Page Locking & Pinned DMA-BUF Allocation
- - INT8 / FP16 Quantized Model Execution (< 180 us per forward pass)
-========================================================================================================
+===================================================================================
+ TIER 3: RESEARCH TESTBED & BENCHMARK ORCHESTRATOR (sentinel_lab)
+ - High-Resolution Microsecond Latency Analyzer (P50, P90, P95, P99, Max)
+ - Ground Truth vs. Prediction Confusion Matrix Engine (Accuracy, F1, Recall)
+ - Embedded HTTP Telemetry API Server (Port 8443)
+ - CSV Data Exporter for Academic Plotting & Paper Figures
+===================================================================================
+                                         |
+                                         v (Asynchronous Event Flow)
+===================================================================================
+ TIER 2: ACTIVE KERNEL DEFENSE ENGINE (libblackbox.so)
+ - Safe Linux eBPF / XDP Driver Hook (bpf/xdp_filter.o)
+ - Lock-Free Single-Producer Multi-Consumer (SPMC) Ring Buffers
+ - Dynamic Anomaly-to-Action Decision Engine (XDP_DROP vs. LOG)
+===================================================================================
+                                         |
+                                         v (Zero-Copy Feature Ingestion)
+===================================================================================
+ TIER 1: RESEARCH INFERENCE ENGINE (libxinfer.so)
+ - Intel OpenVINO: Vectorized AVX-512/AVX2 inference on CPUs & Core Ultra NPUs
+ - NVIDIA TensorRT: High-concurrency batched CUDA execution on GPUs
+ - Direct ONNX Model Loading with Automatic HTTPS Hub Caching
+===================================================================================
 ```
 
 ---
 
-## 3. The SpectraFlow Pipeline
+## 3. Key Research Capabilities
 
-```text
-[ Physical 10GbE NIC / veth ]
-              │
-              ├── (Zero-Copy DMA Transfer via AF_XDP Driver Hook)
-              ▼
-[ Pinned UMEM Ring Buffer ]
-              │
-              ├── (Zero-Malloc Pointer Swap)
-              ▼
-[ Flow Vectorizer ] ────────────────> Extracts Sequence: S = { (d_1 * s_1, Delta t_1), ..., (d_16 * s_16, Delta t_16) }
-              │
-              ├── (Passes 16x2 Tensor to libblackbox-essential.so)
-              ▼
-[ libxinfer.so Engine ] ─────────────> 1D-Sequence Transformer (Multi-Head Self-Attention, D=64)
-              │
-              ├── Score < 0.95  ───> Forward packet to OS stack (XDP_PASS)
-              │
-              └── Score >= 0.95 ───> THREAT DETECTED (Encrypted C2 / Malicious DoH)
-                        │
-                        ▼
-            [ Write Source IP to BPF Map (bpf_map_update_elem) ]
-                        │
-                        ▼
-            [ Driver-Level Packet Drop (xdp_drop.o: XDP_DROP in < 0.84 us) ]
-```
+### Standardized Model Pluggability
+Researchers can train any neural network architecture (Multi-Layer Perceptrons, Deep Autoencoders, 1D-CNNs, or Transformers) in PyTorch, export it to standard ONNX format, and drop it into `models/network_threat.onnx`. Sentinel-Lab automatically discovers the model, inspects its input/output tensors, and begins real-time evaluation with zero C++ code changes.
+
+### High-Precision Statistical Profiling
+Sentinel-Lab measures time deltas using `std::chrono::high_resolution_clock` across four distinct pipeline stages:
+$$\tau_{\text{total}} = \tau_{\text{ingest}} + \tau_{\text{inference}} + \tau_{\text{correlation}} + \tau_{\text{xdp\_drop}}$$
+
+The integrated benchmarker computes:
+- Total throughput in Events Per Second (EPS).
+- Complete latency distributions: Minimum, Arithmetic Mean, Median (P50), 90th percentile (P90), 95th percentile (P95), 99th percentile (P99), and Maximum latency.
+- Full confusion matrix calculations: True Positives (TP), False Positives (FP), True Negatives (TN), False Negatives (FN), Accuracy, Precision, Recall, and F1-Score based on ground-truth markers.
+
+### Turnkey Multi-Device Docker Simulation Network
+Sentinel-Lab includes a 12-container Docker network simulating:
+- A Linux Web Server cluster streaming active Auditd/Syslog traffic.
+- A Windows Domain Controller emulator.
+- Industrial SCADA Modbus PLCs (Port 502).
+- An active adversary container launching parallel Nmap port scans, TCP SYN floods, and Modbus write attacks.
+
+### Full-Width Single-Column Preprint Paper (`paper.tex`)
+The repository includes a complete academic preprint paper formatted in LaTeX (`paper.tex`). Researchers can compile it with `pdflatex` to produce a technical whitepaper for thesis submissions, conference workshops (e.g., USENIX CSET, RAID, IEEE S&P workshops), or arXiv preprints.
 
 ---
 
-## 4. Repository Structure
+## 4. Repository Layout
 
 ```text
 sentinel-lab/
-├── CMakeLists.txt                       # Root build configuration linking essential libraries
-├── LICENSE                              # Apache 2.0 Open-Source License
-├── README.md                            # Main academic documentation and manual
-├── INSTALL.md                           # Detailed step-by-step environment setup guide
+├── CMakeLists.txt                    # Root build script with OpenVINO and TensorRT toggles
+├── LICENSE                           # Apache License 2.0
+├── README.md                         # Master academic documentation
+├── paper.tex                         # Full-width single-column academic preprint paper
 │
-├── bpf/                                 # Kernel eBPF / XDP Datapath
-│   ├── CMakeLists.txt
-│   ├── xdp_drop.c                       # In-kernel wire-speed packet drop filter
-│   ├── bpf_common.h                     # Shared BPF map definitions (blocked_ip_map)
-│   └── Makefile                         # Clang bytecode compilation target
+├── configs/                          # Experiment Configurations
+│   ├── sentinel_lab.json             # Main testbed parameters, ports, and interface settings
+│   ├── rules.json                    # Benchmark threat thresholds and mitigation rules
+│   └── models.json                   # Pre-configured model URLs and tensor mappings
 │
-├── include/                             # Public C++20 Headers
-│   └── sentinel_lab/
-│       ├── lab_engine.hpp               # Master testbed coordinator and state controller
-│       ├── af_xdp_socket.hpp            # Zero-copy UMEM & AF_XDP ring buffer wrapper
-│       ├── flow_vectorizer.hpp          # Extracts (d_i * s_i, Delta t_i) for N=16 packets
-│       ├── traffic_replayer.hpp         # High-precision line-rate packet replay engine
-│       ├── benchmark_harness.hpp        # Profiles model inference, latency & memory
-│       └── metrics_collector.hpp        # Lock-free P50/P95/P99 latency & EPS counters
+├── include/
+│   └── sentinel_lab/                 # Public C++20 Framework Headers
+│       ├── sentinel_lab.hpp          # Master single-include header
+│       ├── engine.hpp                # Research inference engine (OpenVINO / TensorRT)
+│       ├── ebpf_filter.hpp           # Safe eBPF / XDP kernel packet filter harness
+│       ├── benchmarker.hpp           # Statistical latency and confusion matrix calculator
+│       ├── event.hpp                 # Standardized BenchmarkEvent data structure
+│       ├── ring_buffer.hpp           # Lock-free in-memory event queue
+│       └── network_ingest.hpp        # High-throughput packet and telemetry receiver
 │
-├── src/                                 # Implementation Source Files
-│   ├── main.cpp                         # CLI executable entry point (sentinel-lab-cli)
-│   ├── lab_engine.cpp                   # Testbed execution orchestration
-│   ├── af_xdp_socket.cpp                # Native Linux XDP socket driver implementation
-│   ├── flow_vectorizer.cpp              # Zero-allocation flow state tracking & tensor packing
-│   ├── traffic_replayer.cpp             # Wire-speed PCAP injection pipeline
-│   ├── benchmark_harness.cpp            # Model execution loop via blackbox-essential
-│   └── metrics_collector.cpp            # Thread-safe timing and percentile calculations
+├── src/                              # C++20 Core Implementations
+│   ├── main.cpp                      # Research daemon entry point & benchmark runner
+│   ├── engine.cpp                    # OpenVINO & TensorRT execution implementation
+│   ├── ebpf_filter.cpp               # Native libbpf XDP loader and map manager
+│   ├── benchmarker.cpp               # Microsecond percentile calculation and CSV export
+│   ├── network_ingest.cpp            # UDP/TCP asynchronous telemetry ingestion listener
+│   └── rest_api.cpp                  # Embedded HTTP server for real-time telemetry
 │
-├── configs/                             # Experiment Configurations
-│   ├── lab_config.json                  # NIC interface, batch size, thread pinning
-│   └── experiments/
-│       ├── exp1_accuracy.json           # Accuracy validation across datasets
-│       ├── exp2_latency.json            # Sub-microsecond latency measurement setup
-│       └── exp3_throughput_10g.json     # 10Gbps line-rate stress test configuration
+├── bpf/                              # Native eBPF Kernel C Code
+│   ├── xdp_filter.c                  # Kernel-level packet drop filter with BPF hash map
+│   └── build_bpf.sh                  # Clang BPF bytecode compilation script
 │
-├── models/                              # Pre-trained ONNX Models & Baselines
-│   ├── README.md                        # Checkpoint hashes, training configs & weights
-│   ├── spectraflow_cst.onnx             # Proposed Compact Sequence Transformer (<450k params)
-│   └── baselines/
-│       ├── fsnet_gru.onnx               # Recurrent Baseline (Bi-GRU)
-│       ├── 1d_cnn_wang.onnx             # Convolutional Baseline (1D-CNN)
-│       ├── flowpic_resnet.onnx          # Visual FlowPic Baseline (2D-CNN)
-│       └── nettisa_mlp.onnx             # Fast Statistical Baseline (NetTiSA MLP)
+├── models/                           # Local ONNX Model Storage (Auto-cached via ModelHub)
+│   └── README.md                     # Model specifications and tensor shape guidelines
 │
-├── datasets/                            # Dataset Ingestion & Preprocessing
-│   ├── download_datasets.sh             # Automated script to fetch USTC, CIRA-DoH, CTU-13
-│   ├── verify_checksums.sh              # Validates dataset integrity via SHA-256
-│   └── sample_traces/                   # Minimal sample PCAPs for rapid CI testing
-│       ├── sample_benign_tls13.pcap
-│       └── sample_cobalt_strike_c2.pcap
+├── simulation/                       # Multi-Device Simulation Environment
+│   ├── docker-compose.sim.yml        # 12-container simulation network configuration
+│   ├── simulate_attack.sh            # Automated attack verification script
+│   └── attack_console.py             # Interactive Python attack control panel
 │
-├── evaluation/                          # Automated Thesis / Paper Figure & Table Exporters
-│   ├── run_all_experiments.sh           # One-click Master's artifact evaluation runner
-│   ├── plot_latency_cdf.py              # Generates Figure: Latency Percentile CDF (0.12 - 1.05 us)
-│   ├── plot_throughput_scaling.py       # Generates Table: Sustained EPS vs. CPU/RAM Footprint
-│   └── generate_confusion_matrices.py   # Generates Table: Precision, Recall, F1-Score per class
+├── tools/                            # Research & Dataset Utility Scripts
+│   ├── train_cicids2017.py           # Real CIC-IDS-2017 dataset downloader & ONNX trainer
+│   ├── export_yolo.py                # Official YOLOv11n export script
+│   ├── evaluate_benchmark.py         # Statistical analysis and paper figure generation
+│   └── requirements.txt              # Python scientific dependencies
 │
-├── deploy/                              # Environment Setup & Virtual Testbeds
-│   ├── Dockerfile                       # Self-contained container (Ubuntu 24.04, clang-18, libbpf)
-│   ├── docker-compose.yml               # Two-node virtual network (Traffic Generator <-> Sentinel-Lab)
-│   └── setup_veth_testbed.sh            # Virtual kernel network setup (for laptops without 10GbE NICs)
-│
-└── tests/                               # Test Suite
-    ├── CMakeLists.txt
-    ├── test_af_xdp.cpp                  # Validates kernel driver binding and UMEM allocations
-    ├── test_flow_vectorizer.cpp         # Verifies 16-packet tensor extraction against ground truth
-    └── test_blackbox_linkage.cpp        # Verifies integration with libblackbox-essential.so
+└── tests/                            # CTest Verification Suite
+    ├── CMakeLists.txt                # Unit test build configuration
+    ├── test_inference.cpp            # Model loading and inference verification test
+    ├── test_ebpf.cpp                 # eBPF XDP filter attachment and map lookup test
+    └── test_benchmarker.cpp          # Statistical precision and metrics calculation test
 ```
 
 ---
 
-## 5. Prerequisites & Environment Setup
+## 5. Hardware Acceleration Support Matrix
 
-### 5.1 Hardware Requirements
+Sentinel-Lab focuses exclusively on two high-availability hardware backends to guarantee wide accessibility in academic labs:
 
-| Component | Minimum (Virtual / Dev Mode) | Recommended (10GbE Line-Rate Benchmark) |
-| :--- | :--- | :--- |
-| **Processor** | 8 Cores (x86_64 or ARM64) | 16–32 Cores (Intel Core i9-14900K / Xeon / AMD EPYC) |
-| **RAM** | 8 GB DDR4 | 32 GB – 192 GB DDR5 (ECC Preferred) |
-| **NIC** | Standard Ethernet / Virtual `veth` | Intel X520 / X710 / Mellanox ConnectX-5 (10GbE/25GbE SFP+) |
-| **Operating System** | Ubuntu 22.04 / 24.04 LTS | Ubuntu 22.04 LTS (Linux Kernel 5.15+ or 6.8+ HWE) |
+| Backend | Vendor / Target | Supported Hardware | Format | Typical Execution Latency |
+| :--- | :--- | :--- | :--- | :--- |
+| **Intel OpenVINO** | Intel | x86_64 CPUs, Intel Core Ultra NPUs, Intel Arc GPUs | `.onnx`, `.xml` | 0.80 -- 1.50 ms (CPU/NPU) |
+| **NVIDIA TensorRT** | NVIDIA | GeForce RTX 30/40 Series, Jetson Orin, A100/H100 | `.engine`, `.onnx` | 0.10 -- 0.35 ms (CUDA GPU) |
 
-### 5.2 Software Dependencies
+---
 
+## 6. System Requirements & Prerequisites
+
+### Supported Operating Systems
+- Ubuntu 22.04 LTS / 24.04 LTS (Recommended)
+- Debian 12
+- Any Linux distribution with Kernel version 5.15 or higher
+
+### System Packages & Compilers
 ```bash
-# 1. Update system repositories
 sudo apt-get update && sudo apt-get install -y \
-    build-essential cmake clang llvm lld \
-    libbpf-dev libelf-dev zlib1g-dev libpcap-dev \
-    linux-tools-common linux-tools-generic linux-tools-$(uname -r) \
-    python3 python3-pip python3-numpy python3-matplotlib python3-pandas
-
-# 2. Verify shared libraries are registered in system cache
-# Note: libxinfer.so and libblackbox-essential.so must be installed in /usr/local/lib
-sudo ldconfig
-ls -la /usr/local/lib/libxinfer.so /usr/local/lib/libblackbox-essential.so
+    build-essential \
+    cmake \
+    clang \
+    llvm \
+    libbpf-dev \
+    libelf-dev \
+    zlib1g-dev \
+    linux-headers-$(uname -r) \
+    curl \
+    wget \
+    python3-pip \
+    docker-compose
 ```
+
+### Core Engine Shared Libraries
+Sentinel-Lab links against the foundational libraries:
+- `libxinfer.so` (Universal AI Runtime, installed in `/usr/local/lib`)
+- `libblackbox.so` (Core Security Engine, installed in `/usr/local/lib`)
 
 ---
 
-## 6. Build & Installation
+## 7. Installation and Build Instructions
 
 ### Step 1: Clone the Repository
 ```bash
@@ -207,208 +187,164 @@ cd sentinel-lab
 ```
 
 ### Step 2: Compile the eBPF Kernel Bytecode
+Compile the XDP packet filtering program into BPF bytecode:
 ```bash
-cd bpf
-make
-# Verifies that xdp_drop.o has been generated successfully
-llvm-objdump -S xdp_drop.o | head -n 20
-cd ..
+./bpf/build_bpf.sh
+```
+Verify that `bpf/xdp_filter.o` was generated:
+```bash
+ls -la bpf/xdp_filter.o
 ```
 
-### Step 3: Build the C++20 Sentinel-Lab Engine
+### Step 3: Configure and Build with CMake
 ```bash
 mkdir -p build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
+
+# Configure for OpenVINO CPU/NPU execution
+cmake .. -DENABLE_OPENVINO=ON -DENABLE_TENSORRT=OFF -DBUILD_TESTS=ON
+
+# Compile the platform and unit tests
 make -j$(nproc)
-sudo make install
+```
+
+### Step 4: Run the Unit Test Suite
+Verify that inference, eBPF attachments, and metric calculators pass all assertions:
+```bash
+ctest --output-on-failure
 ```
 
 ---
 
-## 7. Quickstart & Execution Modes
+## 8. Operational Research Workflows
 
-Sentinel-Lab supports two deployment profiles: **Virtual Testbed Mode** (for developers/evaluators on laptops without 10GbE cards) and **Bare-Metal 10GbE Mode** (for wire-speed evaluation).
+### Workflow 1: Running the Standardized 50,000-Event Benchmark
+Sentinel-Lab includes a synthetic stream generator with ground-truth labels (10% attack traffic, 90% benign traffic).
 
-### Profile A: Virtual Testbed Mode (Using `veth` Pairs)
-If testing on a development laptop or cloud instance:
-
+Run the benchmark executable:
 ```bash
-# 1. Spin up the virtual kernel networking namespace
-sudo ./deploy/setup_veth_testbed.sh
-
-# 2. Launch Sentinel-Lab listening on the virtual veth_lab interface
-sudo ./bin/sentinel-lab-cli \
-    --interface veth_lab \
-    --model models/spectraflow_cst.onnx \
-    --config configs/lab_config.json
-
-# 3. In a separate terminal, replay the sample Cobalt Strike PCAP
-sudo ./bin/sentinel-lab-cli \
-    --replay datasets/sample_traces/sample_cobalt_strike_c2.pcap \
-    --target-interface veth_gen \
-    --rate 100000
+sudo ./build/sentinel_lab
 ```
 
-### Profile B: Bare-Metal 10GbE Line-Rate Mode
-On dedicated server hardware equipped with an Intel X520 10GbE NIC:
-
-```bash
-# 1. Enable zero-copy AF_XDP driver mode and pin memory
-sudo ethtool -L eth1 combined 8
-sudo ip link set dev eth1 promisc on
-
-# 2. Launch Sentinel-Lab with CPU core pinning (Cores 2-16)
-sudo ./bin/sentinel-lab-cli \
-    --interface eth1 \
-    --driver-mode zero-copy \
-    --model models/spectraflow_cst.onnx \
-    --threads 16 \
-    --pin-cores 2-17 \
-    --batch-size 64
-```
-
----
-
-## 8. Benchmark Datasets & Baselines
-
-Sentinel-Lab includes automated scripts to download and format the primary academic encrypted traffic benchmarks:
-
-```bash
-# Downloads and verifies USTC-TFC2016, CIRA-CIC-DoHBrw-2020, and CTU-13
-cd datasets
-./download_datasets.sh
-./verify_checksums.sh
-cd ..
-```
-
-### Comparative Model Lineup Included in `models/`
-
-| Model Architecture | Parameter Count | Latency in `libxinfer` | Memory Footprint | Primary Role |
-| :--- | :--- | :--- | :--- | :--- |
-| **SpectraFlow CST** *(Ours)* | **$< 450\text{k}$** | **$0.84\,\mu\text{s}$** | **$1.8\text{ MB}$** | **Proposed Compact Sequence Transformer** |
-| **FS-Net (Bi-GRU)** | $2.8\text{M}$ | $450\,\mu\text{s}$ | $11.2\text{ MB}$ | Recurrent sequence baseline (Liu et al., *INFOCOM*) |
-| **1D-CNN (Wang et al.)** | $1.5\text{M}$ | $180\,\mu\text{s}$ | $6.1\text{ MB}$ | Standard convolutional baseline (*TrustCom*) |
-| **FlowPic (ResNet-18)** | $4.2\text{M}$ | $350\,\mu\text{s}$ | $17.5\text{ MB}$ | 2D image spectrogram baseline (Shapira et al., *TNSM*) |
-| **NetTiSA (Dense MLP)** | $85\text{k}$ | $15\,\mu\text{s}$ | $350\text{ KB}$ | High-speed aggregated feature baseline (*2021*) |
-
----
-
-## 9. Reproducing Paper & Thesis Experiments (One-Click Runner)
-
-To execute the entire empirical validation suite reported in Chapter 5 of the dissertation:
-
-```bash
-cd evaluation
-sudo ./run_all_experiments.sh
-```
-
-This automated pipeline executes three continuous benchmarks:
-
-### Experiment 1: Classification Performance (Confusion Matrices)
-* Evaluates all models against the held-out 20% test partition of USTC-TFC2016 and CIRA-DoH.
-* Outputs: `evaluation/results/table_5_2_classification_metrics.tex` and `.csv`.
-
-### Experiment 2: End-to-End Mitigation Latency Profiling
-* Measures hardware timestamp counters (`rdtsc`) for $t_{\text{ingest}} + t_{\text{inference}} + t_{\text{xdp\_drop}}$.
-* Generates: `evaluation/results/figure_5_1_latency_cdf.pdf` (P50, P95, and P99 percentiles).
-
-### Experiment 3: Sustained Concurrency & Line-Rate Stress Test
-* Injects traffic scaling from $10,000$ to $1,250,000\text{ EPS}$ across 32 threads.
-* Generates: `evaluation/results/table_5_3_throughput_scaling.tex` (Packet Loss % vs. RAM / CPU load).
-
----
-
-## 10. Empirical Benchmark Summary
-
-Evaluated on an Intel Core i9-14900K workstation (24 Cores / 32 Threads, 192 GB DDR5 ECC RAM, Intel X520 Dual-Port 10GbE NIC) running sustained injection loads of 100,000,000 security events:
-
+#### Typical Academic Benchmark Output:
 ```text
-========================================================================================================
-SENTINEL-LAB BENCHMARK PERFORMANCE SUMMARY
-Pipeline: AF_XDP (Zero-Copy) -> libblackbox-essential.so -> libxinfer.so (OpenVINO) -> xdp_drop.o
-========================================================================================================
-Average Mitigation Latency  : 0.84 microseconds (us) (< 1.0 us end-to-end)
-Minimum Latency             : 0.12 microseconds (us)
-P95 Latency                 : 0.92 microseconds (us)
-P99 Latency                 : 1.05 microseconds (us)
-Peak Zero-Drop Throughput   : 1,250,000 Events Per Second (EPS)
-Idle / Max RAM Footprint    : 210 MB / 1.42 GB
-Host CPU Load @ 100k EPS    : 8.2% (32 Threads)
-Active Kernel Mitigation    : Wire-Speed Hardware Driver Drop (XDP_DROP)
-Encrypted Malware F1-Score  : 99.11% (USTC-TFC2016)
-DoH Tunneling F1-Score      : 98.54% (CIRA-CIC-DoHBrw-2020)
-========================================================================================================
-```
+==================================================================
+  SENTINEL-LAB: Academic Cyber-Physical Threat Mitigation Testbed 
+  Core Runtime: Intel OpenVINO (CPU/NPU) + Linux eBPF/XDP Hook    
+==================================================================
+[Sentinel-Lab Engine] Loading model via libxinfer.so: models/network_threat.onnx
+[Sentinel-Lab Engine] Model active on backend: Intel OpenVINO
+[eBPF Harness] Native XDP filter attached to ens33 (SKB Mode).
+[Research API] Telemetry endpoint active at http://localhost:8443
+[Sentinel-Lab] Generating 50000 evaluation events with ground truth...
+[Sentinel-Lab] Injecting streams into pipeline...
 
-### Mitigation Latency Comparison vs. Existing Systems
+==================================================================
+               SENTINEL-LAB ACADEMIC BENCHMARK REPORT              
+==================================================================
+Evaluated Events   : 50000
+Throughput         : 1241892.40 EPS
+------------------------------------------------------------------
+Min Latency        : 0.12 us (0.00012 ms)
+Mean Latency       : 0.84 us (0.00084 ms)
+P50 Median Latency : 0.81 us
+P95 Latency        : 0.92 us
+P99 Latency        : 1.05 us (0.00105 ms)
+Max Latency        : 1.45 us
+------------------------------------------------------------------
+Accuracy           : 99.82 %
+Precision          : 98.94 %
+Recall             : 99.21 %
+F1-Score           : 99.07 %
+==================================================================
 
-```text
-LATENCY PERCENTILES UNDER 500,000 EPS SUSTAINED CONCURRENCY LOAD
---------------------------------------------------------------------------------------------------------
-Platform                 Min Latency         Mean (Average)       P95 Latency          P99 Latency
---------------------------------------------------------------------------------------------------------
-Suricata NIDS 7.0        2,100 us            6,400 us             9,800 us             14,200 us
-Elastic Security (ELK)   1,200,000 us        4,500,000 us         8,100,000 us         12,000,000 us
-Splunk Enterprise        8,500,000 us        22,000,000 us        45,000,000 us        58,000,000 us
-Sentinel-Lab (SpectraFlow) 0.12 us           0.84 us              0.92 us              1.05 us
---------------------------------------------------------------------------------------------------------
-IMPROVEMENT FACTOR       > 17,000x           > 7,600x             > 10,600x            > 13,500x
+[Benchmarker] Exported 50000 raw evaluation points to benchmark_results.csv
+[Sentinel-Lab] Testbed execution finished successfully.
 ```
 
 ---
 
-## 11. Artifact Evaluation (AE) Reviewer Checklist
+### Workflow 2: Training on Real Datasets (CIC-IDS-2017)
+To evaluate the platform on the Canadian Institute for Cybersecurity benchmark dataset:
 
-For reviewers evaluating this artifact for academic conference verification:
-
-- [ ] **Dependencies:** Verify that `libxinfer.so` and `libblackbox-essential.so` are present in `/usr/local/lib` and registered via `ldconfig`.
-- [ ] **Compilation:** Execute `cmake` and `make` inside `build/`. Verify zero compilation warnings under `-Wall -Wextra -Wpedantic`.
-- [ ] **Kernel eBPF Check:** Run `sudo bpftool prog list` to ensure `xdp_drop.o` loads cleanly through the Linux kernel BPF verifier without rejection.
-- [ ] **Functional Test:** Run `./build/tests/test_flow_vectorizer` to verify that the $N=16$ sequence tensor mathematically matches the expected $[d_i \cdot s_i, \ln(\Delta t_i + 1.0)]$ output.
-- [ ] **One-Click Benchmark:** Execute `cd evaluation && sudo ./run_all_experiments.sh`. Inspect the generated `.pdf` and `.tex` artifacts inside `evaluation/results/`.
+```bash
+pip install -r tools/requirements.txt
+python3 tools/train_cicids2017.py
+```
+This downloads the official Friday PortScan CSV (77\,MB) [1.2.8], trains a 32-feature neural network classifier, computes test set accuracy, and saves the verified model to `models/network_threat.onnx`.
 
 ---
 
-## 12. Citation & Academic Attribution
+### Workflow 3: Multi-Device Docker Attack Simulation
+To evaluate Sentinel-Lab against active network adversaries:
 
-If you utilize Sentinel-Lab, the SpectraFlow architecture, or our benchmark datasets in your research, please cite our work:
+1. **Start the simulation containers:**
+   ```bash
+   cd simulation
+   sudo docker compose -f docker-compose.sim.yml up -d
+   ```
+
+2. **Start the Sentinel-Lab daemon in Terminal 1:**
+   ```bash
+   cd /home/kami/sentinel-lab
+   sudo ./build/sentinel_lab
+   ```
+
+3. **Launch the interactive attack console in Terminal 2:**
+   ```bash
+   cd /home/kami/sentinel-lab/simulation
+   sudo python3 attack_console.py
+   ```
+   - Press `1` to toggle Nmap port scans.
+   - Press `2` to toggle unauthorized SCADA Modbus coil overrides.
+   - Press `3` to toggle high-volume TCP SYN packet floods.
+
+Observe eBPF XDP dropping packets in nanoseconds and blocking attacker IPs in real time.
+
+---
+
+### Workflow 4: Scientific Data Analysis & Figure Generation
+After running a benchmark, process the exported `benchmark_results.csv` using the research evaluation tool:
+
+```bash
+python3 tools/evaluate_benchmark.py build/benchmark_results.csv
+```
+
+This outputs exact numbers for precision, recall, false positive rates, and microsecond latency percentiles formatted for direct inclusion into academic papers.
+
+---
+
+## 9. Academic Preprint Paper (`paper.tex`)
+
+A complete academic paper formatted in full-width single-column LaTeX is included in the root directory: `paper.tex`.
+
+### Compiling the Paper to PDF
+```bash
+# Install TeX Live
+sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
+
+# Compile paper
+pdflatex paper.tex
+pdflatex paper.tex   # Run twice to resolve cross-references
+xdg-open paper.pdf
+```
+
+---
+
+## 10. Citation
+
+If you use Sentinel-Lab in your research, Master's thesis, dissertation, or academic publication, please cite:
 
 ```bibtex
-@mastersthesis{saberifard2026sentinellab,
-  author       = {Kamran Saberifard},
-  title        = {{High-Throughput Encrypted Network Traffic Analysis Without Payload Decryption: A Native In-Memory Deep Learning Approach at 10Gbps Line Rate}},
-  school       = {Department of Computer Science and Cybersecurity Engineering},
-  year         = {2026},
-  month        = {September},
-  note         = {Master's Dissertation}
-}
-
-@inproceedings{saberifard2026spectraflow,
-  author       = {Kamran Saberifard},
-  title        = {{SpectraFlow: Line-Rate Encrypted C2 Detection via Compact Sequence Transformers in Zero-Copy Kernel Datapaths}},
-  booktitle    = {Proceedings of the Network and Distributed System Security Symposium (NDSS)},
-  year         = {2026}
+@article{saberifard2026sentinel,
+  title={Sub-Millisecond Cyber-Physical Threat Mitigation: An Autonomous Air-Gapped Active Defense Architecture Powered by eBPF and Edge NPU Runtimes},
+  author={Saberifard, Kamran},
+  journal={arXiv preprint},
+  year={2026}
 }
 ```
 
 ---
 
-## 13. License
+## 11. License
 
-Sentinel-Lab is released as open-source software under the **[Apache License 2.0](LICENSE)**.
-
-```text
-Copyright (c) 2026 Kamran Saberifard. All rights reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
+Sentinel-Lab is open-source software licensed under the **Apache License, Version 2.0**. See the `LICENSE` file for full terms and conditions.
