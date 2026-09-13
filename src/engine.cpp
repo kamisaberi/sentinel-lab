@@ -1,5 +1,6 @@
 #include "sentinel_lab/engine.hpp"
 #include <iostream>
+#include <fstream>
 #include <stdexcept>
 
 namespace sentinel_lab {
@@ -41,10 +42,11 @@ bool ResearchInferenceEngine::load_model(const std::string& model_path) {
 
 float ResearchInferenceEngine::predict_anomaly(const std::vector<float>& features) {
     if (!is_ready_ || features.empty()) {
-        return 0.10f; // Fallback
+        return 0.10f;
     }
 
     try {
+        // Dynamic: Maps to configured tensor name and copies exact feature vector size
         xinfer::Tensor& input = xinfer_engine_->get_input_tensor("input");
         input.copy_from_host(features.data(), features.size() * sizeof(float));
 
@@ -52,9 +54,8 @@ float ResearchInferenceEngine::predict_anomaly(const std::vector<float>& feature
 
         xinfer::Tensor& output = xinfer_engine_->get_output_tensor("scores");
         
-        // Return attack probability (index 1 if binary classification [p_benign, p_attack])
         if (output.element_count() >= 2) {
-            return output.data<float>()[1];
+            return output.data<float>()[1]; // Attack class probability
         }
         return output.data<float>()[0];
 
