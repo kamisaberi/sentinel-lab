@@ -1,1 +1,3 @@
 build
+examples/.venv
+examples/models
