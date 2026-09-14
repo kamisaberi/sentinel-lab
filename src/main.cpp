@@ -1,4 +1,5 @@
 #include "sentinel_lab/sentinel_lab.hpp"
+#include "sentinel_lab/rest_api.hpp"
 #include <iostream>
 #include <chrono>
 #include <thread>
@@ -31,11 +32,15 @@ int main() {
     
     ebpf_harness.load_and_attach("bpf/xdp_filter.o");
 
-    // 2. Start Generic Ingestion Receiver on Port 9000
+    // 2. Start REST API Server on Port 8443
+    sentinel_lab::ResearchRESTServer rest_server(8443, benchmarker, ebpf_harness);
+    rest_server.start();
+
+    // 3. Start Generic Ingestion Receiver on Port 9000
     sentinel_lab::NetworkIngestReceiver receiver(9000, queue);
     receiver.start();
 
-    // 3. Start Processing Worker Thread
+    // 4. Processing Worker Thread
     auto start_time = std::chrono::high_resolution_clock::now();
     uint64_t processed_counter = 0;
 
@@ -46,11 +51,11 @@ int main() {
                 auto ev = ev_opt.value();
                 processed_counter++;
 
-                // Predict anomaly dynamically regardless of feature dimension
+                // Predict anomaly score using OpenVINO
                 ev.anomaly_score = engine.predict_anomaly(ev.features);
                 ev.t_infer_done = std::chrono::high_resolution_clock::now();
 
-                // Kernel decision logic
+                // Kernel mitigation logic
                 if (ev.anomaly_score >= 0.85f) {
                     ebpf_harness.block_ip(ev.source_ip);
                     ev.action = sentinel_lab::MitigationAction::KernelDropped;
@@ -76,6 +81,7 @@ int main() {
     });
 
     std::cout << "\n[Sentinel-Lab] Engine locked and ready. Listening on UDP port 9000..." << std::endl;
+    std::cout << "[Sentinel-Lab] Telemetry API listening on port 8443..." << std::endl;
     std::cout << "[Sentinel-Lab] Press Ctrl+C at any time to generate academic benchmark report.\n" << std::endl;
 
     while (g_lab_running) {
@@ -86,9 +92,9 @@ int main() {
     double duration_sec = std::chrono::duration<double>(end_time - start_time).count();
 
     receiver.stop();
+    rest_server.stop();
     if (worker.joinable()) worker.join();
 
-    // 4. Output Statistical Report
     auto metrics = benchmarker.compute_metrics(duration_sec);
     benchmarker.print_academic_report(metrics);
     benchmarker.export_to_csv("benchmark_results.csv");
