@@ -29,7 +29,7 @@ API_URL = "http://localhost:8443"
 MODELS_DIR = "models"
 MODEL_PATH = os.path.join(MODELS_DIR, "network_threat.onnx")
 PRETRAINED_MODEL_URL = (
-    "https://huggingface.co/darkknight25/ddos_xgboost_onnx/resolve/main/ddos_detection_model.onnx"
+    "https://huggingface.co/darkknight25/ddos_xgboost_onnx/resolve/main/ddos_model.onnx?download=true"
 )
 
 DATASET_DIR = "tools"
