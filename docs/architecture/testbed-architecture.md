@@ -331,28 +331,3 @@ private:
 * **Cache Isolation:** Histogram bins reside in contiguous, pre-warmed memory pages, eliminating Level 3 cache eviction during benchmark runs.
 ```
 
----
-
-### Complete in Part 2
-- `sentinel-lab/docs/architecture/testbed-architecture.md`
-- `sentinel-lab/docs/architecture/academic-reproducibility-imperative.md`
-- `sentinel-lab/docs/architecture/hardware-in-the-loop-design.md`
-- `sentinel-lab/docs/architecture/latency-measurement-physics.md`
-- `sentinel-lab/docs/architecture/zero-overhead-instrumentation.md`
-
-All 5 Research Architecture files for `sentinel-lab` are now generated.
-
----
-
-### Files to be Generated in Part 3
-
-The next phase covers **The SLAB Universal Binary Wire Protocol** (`slab-protocol/` - 6 files):
-
-1. `slab-protocol/protocol-specification.md` (SLAB specification: `[Magic | EventID | GroundTruth | Dim | Tensor]`)
-2. `slab-protocol/bytefield-wire-layout.md` (Formal 24-byte header layout and 32-bit word alignment)
-3. `slab-protocol/zero-copy-casting.md` (Memory-mapping raw socket payload buffers directly to float arrays)
-4. `slab-protocol/multi-dataset-compatibility.md` (Cross-dataset evaluation: CIC-IDS-2017 32-dim vs. UNSW-NB15 42-dim)
-5. `slab-protocol/python-slab-serializer.md` (Using `tools/csv_to_slab.py` to convert custom research datasets)
-6. `slab-protocol/protocol-validation-checks.md` (Validating the `0x534C4142` magic header and payload bounds)
-
-Confirm when you are ready to proceed with Part 3.
