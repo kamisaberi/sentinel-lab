@@ -580,30 +580,3 @@ The diagram below illustrates the flow of benchmark data through the `sentinel-l
 ```
 ```
 
----
-
-### Complete in Part 1
-- `sentinel-lab/docs/mkdocs.yml`
-- `sentinel-lab/docs/index.md`
-- `sentinel-lab/docs/getting-started/overview.md`
-- `sentinel-lab/docs/getting-started/system-requirements.md`
-- `sentinel-lab/docs/getting-started/installation-and-build.md`
-- `sentinel-lab/docs/getting-started/ten-minute-quickstart.md`
-- `sentinel-lab/docs/getting-started/verifying-environment.md`
-- `sentinel-lab/docs/getting-started/architecture-at-a-glance.md`
-
-All 8 root configuration and onboarding files are now generated.
-
----
-
-### Files to be Generated in Part 2
-
-The next phase covers **Research & Systems Engineering Design** (`architecture/` - 5 files):
-
-1. `architecture/testbed-architecture.md` (Decoupled C++20 research engine and socket polling loop)
-2. `architecture/academic-reproducibility-imperative.md` (Why static CSV training fails in real-world packet processing)
-3. `architecture/hardware-in-the-loop-design.md` (Validating true driver-level mitigation on live 10GbE network frames)
-4. `architecture/latency-measurement-physics.md` (Microsecond clock precision, hardware timestamps, and jitter)
-5. `architecture/zero-overhead-instrumentation.md` (Profiling execution cycles without polluting benchmark results)
-
-Confirm when you are ready to proceed with Part 2.
