@@ -342,28 +342,3 @@ sudo python3 examples/run_full_evaluation.py \
 ```
 ```
 
----
-
-### Complete in Part 9
-- `sentinel-lab/docs/tutorials/evaluating-custom-csv-datasets.md`
-- `sentinel-lab/docs/tutorials/benchmarking-intel-npu-vs-cpu.md`
-- `sentinel-lab/docs/tutorials/measuring-xdp-drop-cycles.md`
-- `sentinel-lab/docs/tutorials/exporting-reproducible-csv-artifacts.md`
-- `sentinel-lab/docs/tutorials/running-testbed-in-vmware.md`
-
-All 5 Hands-On Research Walkthroughs for `sentinel-lab` are now generated.
-
----
-
-### Files to be Generated in Part 10 (Final Phase for Project 5)
-
-The final phase covers **Troubleshooting & Help Desk Diagnostics** (`troubleshooting/` - 6 files), completing the entire documentation tree for `sentinel-lab`:
-
-1. `troubleshooting/dataset-download-errors.md` (Resolving Canadian Institute for Cybersecurity archive timeouts)
-2. `troubleshooting/raw-socket-permission-denied.md` (Managing `CAP_NET_RAW` and root execution boundaries)
-3. `troubleshooting/ebpf-jit-compiler-errors.md` (Fixing missing kernel BTF, bpffs, and clang BPF target issues)
-4. `troubleshooting/openvino-tensorrt-linking-issues.md` (Resolving shared library paths and CUDA driver mismatches)
-5. `troubleshooting/faq.md` (Technical Frequently Asked Questions)
-6. `troubleshooting/support.md` (Academic issue tracker, contributing guide, and research contacts)
-
-Confirm when you are ready to proceed with Part 10.
