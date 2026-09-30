@@ -1,24 +1,108 @@
-# Verifying Environment
+---
 
-> **Status:** Draft — placeholder content. Final technical prose is forthcoming.
+### File: `sentinel-lab/docs/getting-started/verifying-environment.md`
 
+```markdown
+# Verifying Your Environment & Socket Capabilities
 
-Checking raw socket capabilities, eBPF JIT, and memory limits.
+Validate that your Linux host environment possesses the necessary socket permissions, eBPF capabilities, and memory limits before initiating line-rate benchmark runs.
 
-## Sockets
+---
 
-CAP_NET_RAW or root; AF_PACKET rings need locked-memory headroom.
+## 1. Testing Raw Socket Privileges (`CAP_NET_RAW`)
 
-## JIT & memory
-
-JIT enabled, BTF present, mlock limits sized for UMEM arenas.
+Streaming the SLAB protocol over raw layer-2 interfaces requires either superuser privileges (`sudo`) or the `CAP_NET_RAW` Linux capability:
 
 ```bash
-$ sysctl net.core.bpf_jit_enable
-$ ls /sys/kernel/btf/vmlinux
-$ ulimit -l   # locked memory for rings
+# Check if current user or binary can open raw sockets
+python3 -c "import socket; s = socket.socket(socket.AF_PACKET, socket.SOCK_RAW)"
+```
+
+If this raises `PermissionError: [Errno 1] Operation not permitted`, assign the capability to the Python virtual environment or binary:
+
+```bash
+sudo setcap 'cap_net_raw,cap_net_admin=+ep' $(which python3)
 ```
 
 ---
 
-*Part of the sentinel-lab documentation set. See mkdocs.yml for navigation.*
+## 2. Checking eBPF JIT & BTF Availability
+
+Confirm that the eBPF Just-In-Time compiler is running and kernel type information is readable:
+
+```bash
+# 1. Verify eBPF JIT Compiler is Active
+cat /proc/sys/net/core/bpf_jit_enable
+# Expected Output: 1
+
+# 2. Check for BTF kernel debug information
+ls -lh /sys/kernel/btf/vmlinux
+# Expected: File exists (~4-6 MB)
+```
+
+---
+
+## 3. Checking Memory Locking Limits (`ulimit -l`)
+
+Benchmarking zero-copy packet buffers and pinned memory requires unrestricted locked pages:
+
+```bash
+ulimit -l
+```
+
+If the output is not `unlimited`, update `/etc/security/limits.conf` as documented in Tier 2 `blackbox-essential`.
+```
+
+---
+
+### File: `sentinel-lab/docs/getting-started/architecture-at-a-glance.md`
+
+```markdown
+# Architecture at a Glance
+
+The diagram below illustrates the flow of benchmark data through the `sentinel-lab` research harness: from binary dataset serialization through raw socket injection, in-kernel eBPF mitigation, and empirical metrics extraction.
+
+---
+
+```text
+                                [ BENCHMARK DATASET CORPUS ]
+                                (CIC-IDS-2017 / UNSW-NB15)
+                                             │
+                                             ▼ tools/csv_to_slab.py
+ ┌──────────────────────────────────────────────────────────────────────────────────────────┐
+ │ SLAB BINARY WIRE FRAMES (Magic: 0x534C4142 | Ground Truth | 32-dim Tensor)               │
+ └───────────────────────────────────────────┬──────────────────────────────────────────────┘
+                                             │
+                                             ▼ Raw Socket Injection (AF_PACKET / eth0)
+ ┌──────────────────────────────────────────────────────────────────────────────────────────┐
+ │ Linux Driver Ingress Hook (eBPF / XDP Data Plane)                                        │
+ │  - Inspects incoming SLAB Ethernet frame                                                 │
+ │  - Matches IP in blocked_ip_map: If attack detected previously -> XDP_DROP (< 0.84 µs)   │
+ │  - Clean / Un-evaluated frames pass to research harness                                  │
+ └───────────────────────────────────────────┬──────────────────────────────────────────────┘
+                                             │
+                                             ▼ Zero-Copy Pointer Casting
+ ┌──────────────────────────────────────────────────────────────────────────────────────────┐
+ │ sentinel_lab Research Harness (C++20 Engine)                                             │
+ │                                                                                          │
+ │  ┌────────────────────────────────────────────────────────────────────────────────────┐  │
+ │  │ Heterogeneous Silicon Acceleration (libxinfer.so)                                  │  │
+ │  │  • Intel Core Ultra NPU / Xeon AVX-512                                             │  │
+ │  │  • NVIDIA Jetson Orin Nano / RTX A4000 (CUDA Streams)                              │  │
+ │  └────────────────────────────────────────┬───────────────────────────────────────────┘  │
+ │                                           │ Model Classification Output                  │
+ │                                           ▼                                              │
+ │  ┌────────────────────────────────────────────────────────────────────────────────────┐  │
+ │  │ Scientific Parity & Latency Profiler                                               │  │
+ │  │  • Ground Truth vs. Predicted Class ──► Updates Confusion Matrix (TP, FP, FN, TN)  │  │
+ │  │  • Hardware Cycle Timer (__rdtsc)   ──► Records Exact Nanosecond Latency           │  │
+ │  └────────────────────────────────────────────────────────────────────────────────────┘  │
+ └───────────────────────────────────────────┬──────────────────────────────────────────────┘
+                                             │
+                                             ▼ Automated Artifact Generation
+ ┌──────────────────────────────────────────────────────────────────────────────────────────┐
+ │ IEEE Preprint Manuscript Tables (paper/tables/results.tex) & CERN/Zenodo DOI Archive     │
+ └──────────────────────────────────────────────────────────────────────────────────────────┘
+```
+```
+
