@@ -375,28 +375,3 @@ if ((void *)(slab_hdr + 1) > data_end) {
 This prevents user-space memory corruption even under malicious packet flooding.
 ```
 
----
-
-### Complete in Part 3
-- `sentinel-lab/docs/slab-protocol/protocol-specification.md`
-- `sentinel-lab/docs/slab-protocol/bytefield-wire-layout.md`
-- `sentinel-lab/docs/slab-protocol/zero-copy-casting.md`
-- `sentinel-lab/docs/slab-protocol/multi-dataset-compatibility.md`
-- `sentinel-lab/docs/slab-protocol/python-slab-serializer.md`
-- `sentinel-lab/docs/slab-protocol/protocol-validation-checks.md`
-
-All 6 SLAB Protocol documentation files for `sentinel-lab` are now generated.
-
----
-
-### Files to be Generated in Part 4
-
-The next phase covers **Heterogeneous Silicon Comparison** (`dual-silicon-testbed/` - 5 files):
-
-1. `dual-silicon-testbed/dual-target-comparative-model.md` (Comparative methodology: 1-to-1 parity on identical SLAB streams)
-2. `dual-silicon-testbed/intel-openvino-pipeline.md` (Evaluating Intel Core Ultra NPU vs. Xeon CPU via `ov::Tensor`)
-3. `dual-silicon-testbed/nvidia-tensorrt-pipeline.md` (Evaluating NVIDIA Jetson Orin vs. L4 GPU via CUDA streams)
-4. `dual-silicon-testbed/cross-silicon-benchmark-standards.md` (Normalizing batch sizes, precision FP16/INT8, and memory copies)
-5. `dual-silicon-testbed/thermal-and-power-profiling.md` (Measuring energy consumption: Joules per classification)
-
-Confirm when you are ready to proceed with Part 4.
