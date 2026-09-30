@@ -1,0 +1,84 @@
+site_name: Sentinel-Lab Docs
+site_description: Open C++20/eBPF research testbed with SLAB protocol and 10-minute benchmarks.
+repo_url: https://github.com/kamisaberi/sentinel-lab
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.suggest
+    - content.code.copy
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - Getting Started:
+  - Getting Started:
+    - "Architecture at a Glance": getting-started/architecture-at-a-glance.md
+    - "Installation & Build": getting-started/installation-and-build.md
+    - "Overview": getting-started/overview.md
+    - "System Requirements": getting-started/system-requirements.md
+    - "Ten-Minute Quickstart": getting-started/ten-minute-quickstart.md
+    - "Verifying Environment": getting-started/verifying-environment.md
+  - Architecture:
+    - "Reproducibility Imperative": architecture/academic-reproducibility-imperative.md
+    - "Hardware-in-the-Loop Design": architecture/hardware-in-the-loop-design.md
+    - "Latency Measurement Physics": architecture/latency-measurement-physics.md
+    - "Testbed Architecture": architecture/testbed-architecture.md
+    - "Zero-Overhead Instrumentation": architecture/zero-overhead-instrumentation.md
+  - SLAB Protocol:
+    - "Bytefield Wire Layout": slab-protocol/bytefield-wire-layout.md
+    - "Multi-Dataset Compatibility": slab-protocol/multi-dataset-compatibility.md
+    - "SLAB Protocol Specification": slab-protocol/protocol-specification.md
+    - "Protocol Validation Checks": slab-protocol/protocol-validation-checks.md
+    - "Python SLAB Serializer": slab-protocol/python-slab-serializer.md
+    - "Zero-Copy Casting": slab-protocol/zero-copy-casting.md
+  - Dual-Silicon Testbed:
+    - "Cross-Silicon Benchmark Standards": dual-silicon-testbed/cross-silicon-benchmark-standards.md
+    - "Dual-Target Comparative Model": dual-silicon-testbed/dual-target-comparative-model.md
+    - "Intel OpenVINO Pipeline": dual-silicon-testbed/intel-openvino-pipeline.md
+    - "NVIDIA TensorRT Pipeline": dual-silicon-testbed/nvidia-tensorrt-pipeline.md
+    - "Thermal & Power Profiling": dual-silicon-testbed/thermal-and-power-profiling.md
+  - Preprint & Open Science:
+    - "CERN / Zenodo DOI": preprint-and-open-science/cern-zenodo-doi.md
+    - "Citing Sentinel-Lab": preprint-and-open-science/citing-sentinel-lab.md
+    - "Compiling the LaTeX Paper": preprint-and-open-science/compiling-latex-paper.md
+    - "Open Access Licensing": preprint-and-open-science/open-access-licensing.md
+    - "Preprint Overview": preprint-and-open-science/preprint-overview.md
+  - Evaluation Harness:
+    - "Dataset Acquisition (CIC-IDS-2017)": evaluation-harness/dataset-acquisition-cic-ids-2017.md
+    - "Flow Normalization Pipeline": evaluation-harness/flow-normalization-pipeline.md
+    - "Harness Architecture": evaluation-harness/harness-architecture.md
+    - "Metrics Calculation": evaluation-harness/metrics-calculation.md
+    - "Percentile Latency Profiler": evaluation-harness/percentile-latency-profiler.md
+    - "Wire-Speed Raw Socket Injection": evaluation-harness/wire-speed-raw-socket-injection.md
+  - Comparative Benchmarks:
+    - "Benchmark Methodology": comparative-benchmarks/benchmark-methodology.md
+    - "Latency CDF Percentiles": comparative-benchmarks/latency-cdf-percentiles.md
+    - "Reproducibility Audit": comparative-benchmarks/reproducibility-audit.md
+    - "Sentinel vs. Elastic SIEM": comparative-benchmarks/sentinel-vs-elastic-siem.md
+    - "Sentinel vs. Snort 3": comparative-benchmarks/sentinel-vs-snort-3.md
+    - "Sentinel vs. Splunk Enterprise": comparative-benchmarks/sentinel-vs-splunk-enterprise.md
+    - "Sentinel vs. Suricata 7": comparative-benchmarks/sentinel-vs-suricata-7.md
+  - University Curriculum:
+    - "Aalto Collaboration Guide": university-curriculum/aalto-collaboration-guide.md
+    - "Course Module Integration": university-curriculum/course-module-integration.md
+    - "Student Grant Support": university-curriculum/student-grant-support.md
+    - "TalTech Collaboration Guide": university-curriculum/taltech-collaboration-guide.md
+    - "Thesis Topics Guide": university-curriculum/thesis-topics-guide.md
+  - Tutorials:
+    - "Benchmarking Intel NPU vs. CPU": tutorials/benchmarking-intel-npu-vs-cpu.md
+    - "Evaluating Custom CSV Datasets": tutorials/evaluating-custom-csv-datasets.md
+    - "Exporting Reproducible CSV Artifacts": tutorials/exporting-reproducible-csv-artifacts.md
+    - "Measuring XDP Drop Cycles": tutorials/measuring-xdp-drop-cycles.md
+    - "Running the Testbed in VMware": tutorials/running-testbed-in-vmware.md
+  - Troubleshooting:
+    - "Dataset Download Errors": troubleshooting/dataset-download-errors.md
+    - "eBPF JIT Compiler Errors": troubleshooting/ebpf-jit-compiler-errors.md
+    - "Technical FAQ": troubleshooting/faq.md
+    - "OpenVINO/TensorRT Linking Issues": troubleshooting/openvino-tensorrt-linking-issues.md
+    - "Raw Socket Permission Denied": troubleshooting/raw-socket-permission-denied.md
+    - "Support Channels": troubleshooting/support.md
