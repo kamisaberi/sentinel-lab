@@ -441,31 +441,3 @@ NVIDIA Jetson Orin   & {metrics.f1_score():.4f} & 3.80 & 4.20 & 4.60 & 4.90 & 6.
     print(f"[+] LaTeX table generated: {output_path}")
 ```
 ```
-
----
-
-### Complete in Part 6
-- `sentinel-lab/docs/evaluation-harness/harness-architecture.md`
-- `sentinel-lab/docs/evaluation-harness/dataset-acquisition-cic-ids-2017.md`
-- `sentinel-lab/docs/evaluation-harness/flow-normalization-pipeline.md`
-- `sentinel-lab/docs/evaluation-harness/wire-speed-raw-socket-injection.md`
-- `sentinel-lab/docs/evaluation-harness/metrics-calculation.md`
-- `sentinel-lab/docs/evaluation-harness/percentile-latency-profiler.md`
-
-All 6 Autonomous Evaluation Harness files for `sentinel-lab` are now generated.
-
----
-
-### Files to be Generated in Part 7
-
-The next phase covers **Comparative Empirical Benchmarks** (`comparative-benchmarks/` - 7 files):
-
-1. `comparative-benchmarks/benchmark-methodology.md` (Bare-metal testbed specs: i9-14900K, 192GB DDR5, X520 10GbE)
-2. `comparative-benchmarks/sentinel-vs-suricata-7.md` (Sentinel XDP Drop 0.84µs vs. Suricata NFQUEUE 8.4ms)
-3. `comparative-benchmarks/sentinel-vs-snort-3.md` (Throughput, memory footprint, and rule evaluation comparisons)
-4. `comparative-benchmarks/sentinel-vs-elastic-siem.md` (Edge in-kernel mitigation vs. cloud log indexing latency 4.2s)
-5. `comparative-benchmarks/sentinel-vs-splunk-enterprise.md` (Resource utilization: 180MB RAM vs. 68GB RAM)
-6. `comparative-benchmarks/latency-cdf-percentiles.md` (Empirical Cumulative Distribution Function curves)
-7. `comparative-benchmarks/reproducibility-audit.md` (Third-party reproducibility verification logs)
-
-Confirm when you are ready to proceed with Part 7.
