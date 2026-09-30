@@ -254,27 +254,3 @@ cp paper/figures/latency_cdf.pdf ./grant_preliminary_figure.pdf
 > *"Preliminary work conducted using the open-source Sentinel-Lab testbed (DOI: 10.5281/zenodo.1849200) demonstrates that transitioning network threat evaluation from user space to the Linux network driver space via eBPF/XDP reduces mitigation latency from 8.4 milliseconds down to 0.84 microseconds (an 11,666x reduction), while maintaining an F1-score of 0.9988 on standard CIC-IDS-2017 benchmarks. The proposed project builds upon this baseline to investigate..."*
 ```
 
----
-
-### Complete in Part 8
-- `sentinel-lab/docs/university-curriculum/thesis-topics-guide.md`
-- `sentinel-lab/docs/university-curriculum/course-module-integration.md`
-- `sentinel-lab/docs/university-curriculum/taltech-collaboration-guide.md`
-- `sentinel-lab/docs/university-curriculum/aalto-collaboration-guide.md`
-- `sentinel-lab/docs/university-curriculum/student-grant-support.md`
-
-All 5 University Curriculum & Graduate Thesis files for `sentinel-lab` are now generated.
-
----
-
-### Files to be Generated in Part 9
-
-The next phase covers **Hands-On Research Walkthroughs & Tutorials** (`tutorials/` - 5 files):
-
-1. `tutorials/evaluating-custom-csv-datasets.md` (Converting and evaluating an unlabelled university campus PCAP)
-2. `tutorials/benchmarking-intel-npu-vs-cpu.md` (Measuring inference latency on Intel Meteor Lake / Lunar Lake NPUs)
-3. `tutorials/measuring-xdp-drop-cycles.md` (Measuring CPU clock cycles consumed per drop via Linux perf)
-4. `tutorials/exporting-reproducible-csv-artifacts.md` (Formatting benchmark outputs for publication-ready LaTeX tables)
-5. `tutorials/running-testbed-in-vmware.md` (Executing the research harness inside VMware virtual machines)
-
-Confirm when you are ready to proceed with Part 9.
