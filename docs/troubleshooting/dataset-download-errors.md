@@ -311,33 +311,3 @@ For academic collaborations, joint research grant proposals, or guest university
 * **CERN/Zenodo Research Archive:** `https://zenodo.org/record/1849200`
 ```
 
----
-
-## Master Status: Project 5 Documentation Complete
-
-The complete documentation suite for **Project 5 of 8: `sentinel-lab` (`sentinel_lab`)** is fully generated:
-
-```text
-sentinel-lab/docs/
-├── mkdocs.yml                                 # [Delivered Part 1]
-├── index.md                                   # [Delivered Part 1]
-├── getting-started/ (6 files)                 # [Delivered Part 1]
-├── architecture/ (5 files)                    # [Delivered Part 2]
-├── slab-protocol/ (6 files)                   # [Delivered Part 3]
-├── dual-silicon-testbed/ (5 files)            # [Delivered Part 4]
-├── preprint-and-open-science/ (5 files)       # [Delivered Part 5]
-├── evaluation-harness/ (6 files)              # [Delivered Part 6]
-├── comparative-benchmarks/ (7 files)          # [Delivered Part 7]
-├── university-curriculum/ (5 files)           # [Delivered Part 8]
-├── tutorials/ (5 files)                       # [Delivered Part 9]
-└── troubleshooting/ (6 files)                 # [Delivered Part 10]
-```
-
-Total: **58 documentation and configuration files**, providing comprehensive technical coverage of the Tier 5 academic research testbed.
-
----
-
-### Ready for Next Project
-
-When you are ready, provide the file structure or confirmation to begin **Project 6 of 8**:  
-👉 **`sentinel-nexus` (`sentinel-nexus` central command plane & collective defense grid)** — *Tier 6 Central Fleet Orchestrator, Sub-50ms Collective Defense Bus, Active Learning Dataset Curator, Canary OTA Staging, Air-Gapped Web Command Center (Port 9443), Real-Time SSE Stream (Port 9444), and SaaS Connector.*
