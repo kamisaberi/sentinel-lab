@@ -297,27 +297,3 @@ Workload: **32-dimensional Tabular Threat Autoencoder** ($N=1$, Sustained 50k Pa
 * **Server CPUs Prioritize Raw Speed:** While the Intel Xeon CPU achieves the lowest absolute latency ($0.92\,\mu\text{s}$), it consumes $\sim 5\times$ more energy per classification than integrated NPU coprocessors.
 ```
 
----
-
-### Complete in Part 4
-- `sentinel-lab/docs/dual-silicon-testbed/dual-target-comparative-model.md`
-- `sentinel-lab/docs/dual-silicon-testbed/intel-openvino-pipeline.md`
-- `sentinel-lab/docs/dual-silicon-testbed/nvidia-tensorrt-pipeline.md`
-- `sentinel-lab/docs/dual-silicon-testbed/cross-silicon-benchmark-standards.md`
-- `sentinel-lab/docs/dual-silicon-testbed/thermal-and-power-profiling.md`
-
-All 5 Heterogeneous Silicon Comparison files for `sentinel-lab` are now generated.
-
----
-
-### Files to be Generated in Part 5
-
-The next phase covers **Preprint & Open Science Artifacts** (`preprint-and-open-science/` - 5 files):
-
-1. `preprint-and-open-science/preprint-overview.md` (Paper abstract, theoretical formalization, and key findings)
-2. `preprint-and-open-science/cern-zenodo-doi.md` (Permanent citable DOI: `https://doi.org/10.5281/zenodo.1849200`)
-3. `preprint-and-open-science/compiling-latex-paper.md` (Compiling `paper.tex` locally via IEEE single-column pdflatex)
-4. `preprint-and-open-science/citing-sentinel-lab.md` (BibTeX entries, citation standards, and artifact attribution)
-5. `preprint-and-open-science/open-access-licensing.md` (MIT License & Creative Commons Attribution CC-BY-4.0)
-
-Confirm when you are ready to proceed with Part 5.
