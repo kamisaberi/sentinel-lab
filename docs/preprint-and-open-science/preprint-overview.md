@@ -256,28 +256,3 @@ The project is released under two complementary licensing structures:
 * **Commercial Testbeds:** Hardware manufacturers and industrial vendors may integrate the SLAB protocol into evaluation testbeds to benchmark their silicon coprocessors against standard datasets.
 ```
 
----
-
-### Complete in Part 5
-- `sentinel-lab/docs/preprint-and-open-science/preprint-overview.md`
-- `sentinel-lab/docs/preprint-and-open-science/cern-zenodo-doi.md`
-- `sentinel-lab/docs/preprint-and-open-science/compiling-latex-paper.md`
-- `sentinel-lab/docs/preprint-and-open-science/citing-sentinel-lab.md`
-- `sentinel-lab/docs/preprint-and-open-science/open-access-licensing.md`
-
-All 5 Preprint & Open Science files for `sentinel-lab` are now generated.
-
----
-
-### Files to be Generated in Part 6
-
-The next phase covers the **Autonomous Evaluation Harness** (`evaluation-harness/` - 6 files):
-
-1. `evaluation-harness/harness-architecture.md` (Architecture of `examples/run_full_evaluation.py`)
-2. `evaluation-harness/dataset-acquisition-cic-ids-2017.md` (Automated fetching of the 77.4 MB PortScan archive)
-3. `evaluation-harness/flow-normalization-pipeline.md` (Normalizing raw flow statistics into invariant tensors `[-1.0, 1.0]`)
-4. `evaluation-harness/wire-speed-raw-socket-injection.md` (Streaming SLAB packets over raw `AF_PACKET` sockets at 60k+ EPS)
-5. `evaluation-harness/metrics-calculation.md` (Computing Confusion Matrix, Accuracy, Precision, Recall, and F1)
-6. `evaluation-harness/percentile-latency-profiler.md` (Calculating exact p50, p90, p95, p99, and p99.9 latency distributions)
-
-Confirm when you are ready to proceed with Part 6.
