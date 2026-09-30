@@ -293,29 +293,3 @@ sudo python3 ../examples/run_full_evaluation.py --samples 50000 --batch-size 1
 ```
 ```
 
----
-
-### Complete in Part 7
-- `sentinel-lab/docs/comparative-benchmarks/benchmark-methodology.md`
-- `sentinel-lab/docs/comparative-benchmarks/sentinel-vs-suricata-7.md`
-- `sentinel-lab/docs/comparative-benchmarks/sentinel-vs-snort-3.md`
-- `sentinel-lab/docs/comparative-benchmarks/sentinel-vs-elastic-siem.md`
-- `sentinel-lab/docs/comparative-benchmarks/sentinel-vs-splunk-enterprise.md`
-- `sentinel-lab/docs/comparative-benchmarks/latency-cdf-percentiles.md`
-- `sentinel-lab/docs/comparative-benchmarks/reproducibility-audit.md`
-
-All 7 Comparative Benchmark files for `sentinel-lab` are now generated.
-
----
-
-### Files to be Generated in Part 8
-
-The next phase covers **University Curriculum & Graduate Thesis Integration** (`university-curriculum/` - 5 files):
-
-1. `university-curriculum/thesis-topics-guide.md` (Ready-made research proposals in low-latency systems & edge AI)
-2. `university-curriculum/course-module-integration.md` (Laboratory exercises for Advanced OS & Network Security courses)
-3. `university-curriculum/taltech-collaboration-guide.md` (Research alignment with TalTech Cyber Security Laboratory)
-4. `university-curriculum/aalto-collaboration-guide.md` (Research alignment with Aalto University Secure Systems Group)
-5. `university-curriculum/student-grant-support.md` (Supporting academic grant applications with benchmark data)
-
-Confirm when you are ready to proceed with Part 8.
