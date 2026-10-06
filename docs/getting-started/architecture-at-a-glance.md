@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/getting-started/architecture-at-a-glance.md`
-
-```markdown
 # Architecture at a Glance
 
 The diagram below illustrates the flow of benchmark data through the `sentinel-lab` research harness: from binary dataset serialization through raw socket injection, in-kernel eBPF mitigation, and empirical metrics extraction.
@@ -48,6 +43,5 @@ The diagram below illustrates the flow of benchmark data through the `sentinel-l
  ┌──────────────────────────────────────────────────────────────────────────────────────────┐
  │ IEEE Preprint Manuscript Tables (paper/tables/results.tex) & CERN/Zenodo DOI Archive     │
  └──────────────────────────────────────────────────────────────────────────────────────────┘
-```
 ```
 

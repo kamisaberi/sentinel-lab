@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/getting-started/ten-minute-quickstart.md`
-
-```markdown
 # 10-Minute Quickstart: From `git clone` to Empirical Metrics
 
 This walkthrough guides you through executing the automated evaluation pipeline (`run_full_evaluation.py`). It downloads the Canadian Institute for Cybersecurity **CIC-IDS-2017 PortScan dataset**, normalizes flow features, streams them over raw sockets, and calculates empirical confusion matrices and latency percentiles.
@@ -79,6 +74,5 @@ Mitigation Subsystem   : Linux In-Kernel eBPF/XDP (xdp_filter.o)
 ================================================================================
 Status: BENCHMARK COMPLETE. LaTeX table written to: paper/tables/results.tex
 ================================================================================
-```
 ```
 

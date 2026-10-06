@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/getting-started/system-requirements.md`
-
-```markdown
 # System Requirements & Academic Lab Prerequisites
 
 Review the toolchain, kernel configuration, and hardware requirements before building `sentinel-lab`.
@@ -45,5 +40,4 @@ cat /boot/config-$(uname -r) | grep -E 'CONFIG_BPF_SYSCALL|CONFIG_NET_RAW|CONFIG
 * `CONFIG_BPF_SYSCALL=y`: Allows userspace programs to load eBPF bytecode.
 * `CONFIG_PACKET=y`: Enables `AF_PACKET` raw socket injection.
 * `CONFIG_XDP_SOCKETS=y`: Enables zero-copy AF_XDP ring descriptors.
-```
 

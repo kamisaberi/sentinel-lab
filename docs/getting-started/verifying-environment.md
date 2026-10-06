@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/getting-started/verifying-environment.md`
-
-```markdown
 # Verifying Your Environment & Socket Capabilities
 
 Validate that your Linux host environment possesses the necessary socket permissions, eBPF capabilities, and memory limits before initiating line-rate benchmark runs.
@@ -51,5 +46,4 @@ ulimit -l
 ```
 
 If the output is not `unlimited`, update `/etc/security/limits.conf` as documented in Tier 2 `blackbox-essential`.
-```
 

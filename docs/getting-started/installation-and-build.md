@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/getting-started/installation-and-build.md`
-
-```markdown
 # Building the Research Engine & eBPF Drivers
 
 This guide covers building the native C++ testbed engine (`sentinel_lab`), compiling in-kernel eBPF filters, and installing dependencies from source.
@@ -77,5 +72,4 @@ ninja -j$(nproc)
 * `sentinel_lab`: The core C++20 research execution harness.
 * `slab_generator`: CLI utility for serializing custom datasets into the SLAB protocol.
 * `perf_evaluator`: Microsecond-precision hardware timer benchmark.
-```
 

@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/getting-started/overview.md`
-
-```markdown
 # Open Research Testbed: Sub-Microsecond Threat Mitigation
 
 Intrusion detection research in academic literature suffers from widespread methodological flaws:
@@ -43,5 +38,4 @@ Intrusion detection research in academic literature suffers from widespread meth
 * **CIC-IDS-2017 (Canadian Institute for Cybersecurity):** PortScan, DoS, and BruteForce subsets.
 * **UNSW-NB15 (University of New South Wales):** Advanced lateral movement and modern exploit vectors.
 * **Industrial SCADA Traces:** Triton, Stuxnet, and Industroyer2 cyber-physical attack replays.
-```
 
