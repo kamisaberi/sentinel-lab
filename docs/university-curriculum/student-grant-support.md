@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/university-curriculum/student-grant-support.md`
-
-```markdown
 # Supporting Academic Grant Applications (Horizon Europe, NSF, DARPA)
 
 Graduate students and principal investigators can utilize `sentinel-lab`'s empirical data, benchmark methodologies, and open-source artifacts as foundational preliminary data in competitive grant applications.
@@ -32,5 +27,4 @@ cp paper/figures/latency_cdf.pdf ./grant_preliminary_figure.pdf
 
 ### Pre-Drafted Proposal Abstract Snippet:
 > *"Preliminary work conducted using the open-source Sentinel-Lab testbed (DOI: 10.5281/zenodo.1849200) demonstrates that transitioning network threat evaluation from user space to the Linux network driver space via eBPF/XDP reduces mitigation latency from 8.4 milliseconds down to 0.84 microseconds (an 11,666x reduction), while maintaining an F1-score of 0.9988 on standard CIC-IDS-2017 benchmarks. The proposed project builds upon this baseline to investigate..."*
-```
 

@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/university-curriculum/aalto-collaboration-guide.md`
-
-```markdown
 # Research Collaboration Guide: Aalto University Secure Systems Group
 
 This guide outlines collaborative research initiatives with the **Secure Systems Group at Aalto University (Finland)**, focusing on trusted hardware, Linux kernel security, and verified platform roots of trust.
@@ -36,5 +31,4 @@ This guide outlines collaborative research initiatives with the **Secure Systems
 
 1. **Formal Proofs of XDP Memory Boundaries:** Utilizing formal verification tools (e.g., SeaHorn, Coq) to prove that `xdp_threat_filter()` cannot trigger out-of-bounds pointer dereferences across arbitrary packet encapsulations.
 2. **Confidential Computing at the Edge:** Exploring hardware attestation extensions utilizing Intel TDX (Trust Domain Extensions) and AMD SEV-SNP to protect model weights during runtime execution.
-```
 

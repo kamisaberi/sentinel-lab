@@ -1,12 +1,3 @@
-### Part 8: University Curriculum & Graduate Thesis Integration (`university-curriculum/*`)
-
-This section contains 5 academic curriculum and graduate research integration guides: ready-made Master's and PhD thesis proposals, course laboratory syllabi for Advanced OS and Network Security, institutional collaboration frameworks for **TalTech** and **Aalto University**, and guidelines for leveraging `sentinel-lab` in academic grant applications.
-
----
-
-### File: `sentinel-lab/docs/university-curriculum/thesis-topics-guide.md`
-
-```markdown
 # Graduate Thesis Proposals: Low-Latency Systems & Edge AI
 
 `sentinel-lab` provides a turn-key, reproducible testbed for Master of Science (MSc) and Doctor of Philosophy (PhD) students conducting research in computer systems, operating systems, network security, and cyber-physical systems.
@@ -52,5 +43,4 @@ Below are four ready-made, high-impact research proposals pre-aligned with `sent
 * **Problem Statement:** Cyber-physical systems experience continuous statistical drift due to environmental temperature shifts, mechanical wear, and grid load rebalancing. Unsupervised models retrained on ambient traffic are vulnerable to adversarial "boiling-the-frog" data poisoning.
 * **Research Objective:** Formulate a constrained continual optimization objective combining Masked Autoencoders (MAE) with an invariant topological safety projection. Prove that logical conjunction gates preserve historical exploit detection ($S(\theta^*) = 1.000$) while minimizing reconstruction loss on non-stationary ambient baselines.
 * **Key Research Artifacts:** Mathematical formulations of safety-constrained empirical risk minimization (ERM), empirical evaluations on the 6-month drift dataset, and publication in IEEE TDSC or ACM CCS.
-```
 

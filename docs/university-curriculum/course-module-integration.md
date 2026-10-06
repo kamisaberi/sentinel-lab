@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/university-curriculum/course-module-integration.md`
-
-```markdown
 # Course Module Integration: Advanced OS & Network Security
 
 `sentinel-lab` can be integrated directly into postgraduate computer science curricula as a multi-week laboratory sequence for courses such as **Advanced Operating Systems**, **Network Security**, or **High-Performance Computer Networks**.
@@ -79,5 +74,4 @@ char _license[] SEC("license") = "GPL";
 * Verified compilation via `clang -target bpf -O2`.
 * Successful passage through the Linux in-kernel BPF verifier.
 * Empirical verification of packet drops using `curl` or `mbpoll`.
-```
 
