@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/slab-protocol/zero-copy-casting.md`
-
-```markdown
 # Memory-Mapping & Zero-Copy Casting
 
 Conventional network parsers deserialize incoming byte arrays by allocating new heap objects and copying fields element-by-element. This overhead degrades ingestion throughput.
@@ -78,6 +73,5 @@ bool process_slab_packet_zerocopy(
 }
 
 } // namespace sentinel::lab
-```
 ```
 

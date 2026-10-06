@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/slab-protocol/python-slab-serializer.md`
-
-```markdown
 # Python SLAB Dataset Serializer (`tools/csv_to_slab.py`)
 
 `sentinel-lab` includes a Python utility to convert arbitrary research CSV datasets into the binary SLAB format for wire replay or offline file streaming.
@@ -81,6 +76,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     serialize_csv_to_slab(args.input_csv, args.output_slab, args.label_column, args.positive_label, args.dimensions)
-```
 ```
 

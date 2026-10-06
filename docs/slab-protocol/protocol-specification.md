@@ -1,12 +1,3 @@
-### Part 3: The SLAB Universal Binary Wire Protocol (`slab-protocol/*`)
-
-This section contains 6 technical specifications and reference implementations detailing the **SLAB (Sentinel-Lab) Universal Binary Wire Protocol**: wire layout, memory-mapped zero-copy casting, cross-dataset compatibility, Python serialization tools, and header boundary validation.
-
----
-
-### File: `sentinel-lab/docs/slab-protocol/protocol-specification.md`
-
-```markdown
 # SLAB Universal Binary Wire Protocol Specification
 
 The SLAB (Sentinel-Lab) protocol is an open, self-describing binary wire format designed for hardware-in-the-loop (HIL) intrusion detection research. It embeds high-dimensional machine learning feature tensors alongside verifiable ground-truth annotations inside standard Ethernet/UDP payloads.
@@ -65,5 +56,4 @@ For a standard 32-dimensional NetFlow feature vector ($D = 32$):
 $$\text{Payload Size} = 24\,\text{bytes (Header)} + (32 \times 4\,\text{bytes}) = 152\,\text{bytes}$$
 
 The entire packet easily fits within standard $1500\text{-byte}$ Ethernet Maximum Transmission Units (MTU), eliminating network IP fragmentation.
-```
 

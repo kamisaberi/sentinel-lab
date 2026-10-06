@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/slab-protocol/multi-dataset-compatibility.md`
-
-```markdown
 # Multi-Dataset Cross-Compatibility
 
 Because the SLAB protocol is self-describing through its `dimensions` field ($D$), a single `sentinel_lab` deployment can evaluate disparate intrusion detection benchmarks without recompiling the testbed engine.
@@ -26,5 +21,4 @@ Because the SLAB protocol is self-describing through its `dimensions` field ($D$
 When `sentinel_lab` parses a packet, it reads `header->dimensions`:
 * If the incoming frame dimension matches the loaded AI model's input shape, evaluation executes directly.
 * If a dimension mismatch occurs (e.g. an $80\text{-dim}$ frame arrives at a $32\text{-dim}$ model), the packet is skipped and logged to prevent memory over-runs.
-```
 

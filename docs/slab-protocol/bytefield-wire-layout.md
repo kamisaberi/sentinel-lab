@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/slab-protocol/bytefield-wire-layout.md`
-
-```markdown
 # Formal Bytefield Wire Layout & C++20 Data Structure
 
 To ensure zero-copy deserialization across heterogeneous CPU architectures (x86_64, aarch64), the SLAB header is explicitly packed to 64-bit alignment boundaries.
@@ -57,5 +52,4 @@ Offset    00 01 02 03  04 05 06 07  08 09 0A 0B  0C 0D 0E 0F   ASCII
 * Bytes `04-0B` (`01 00 00 00 00 00 00 00`): Sequence identifier `1`.
 * Bytes `0C-0F` (`01 00 00 00`): Ground-truth annotation `1` (Attack).
 * Bytes `10-13` (`20 00 00 00`): `0x20` = 32 dimensions follow.
-```
 

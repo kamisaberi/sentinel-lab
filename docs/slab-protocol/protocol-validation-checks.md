@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/slab-protocol/protocol-validation-checks.md`
-
-```markdown
 # Protocol Validation Checks & Fuzzing Resilience
 
 When streaming binary packets over raw network sockets, the parser must handle truncated frames, malformed headers, and network noise without throwing uncaught exceptions or crashing the research daemon.
@@ -44,5 +39,4 @@ if ((void *)(slab_hdr + 1) > data_end) {
 ```
 
 This prevents user-space memory corruption even under malicious packet flooding.
-```
 
