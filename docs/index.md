@@ -1,7 +1,3 @@
-
-### File: `sentinel-lab/docs/index.md`
-
-```markdown
 # Sentinel-Lab: Academic Research Testbed (`sentinel_lab`)
 
 **Open Academic Research Testbed, SLAB Binary Wire Protocol & IEEE Preprint Artifact**  
@@ -66,5 +62,4 @@ Operating over raw Linux network sockets (`AF_PACKET`), `sentinel-lab` introduce
 2. **Hardware-in-the-Loop Realism:** Moves beyond theoretical Python notebooks; models evaluate live, streaming binary frames passing over real Linux network sockets.
 3. **Open-Access Scientific Attribution:** Released under permissive dual licensing (**MIT License** for code; **Creative Commons CC-BY-4.0** for data, benchmark traces, and LaTeX manuscripts) with a permanent **CERN/Zenodo DOI**.
 4. **Cross-Architecture Equity:** Evaluates Intel, NVIDIA, and ARM silicon targets under identical batch constraints ($N=1$), identical memory isolation, and identical microsecond measurement harnesses.
-```
 
