@@ -1,12 +1,3 @@
-### Part 10: Troubleshooting & Academic Help Desk (`troubleshooting/*`)
-
-This final section covers troubleshooting dataset downloads from academic mirrors, managing raw socket Linux capabilities, resolving in-kernel eBPF JIT compiler errors, debugging OpenVINO/TensorRT dynamic library linking, academic FAQs, and research support escalation paths for `sentinel-lab`.
-
----
-
-### File: `sentinel-lab/docs/troubleshooting/dataset-download-errors.md`
-
-```markdown
 # Resolving Academic Dataset Acquisition & Archive Timeouts
 
 When running `examples/run_full_evaluation.py`, the automated fetcher connects to the Canadian Institute for Cybersecurity (CIC) repository (`http://205.174.165.80/`). University campus firewalls or server rate-limits can occasionally trigger connection timeouts or incomplete archive downloads.
@@ -55,5 +46,4 @@ e9a2c31e847b2c94b13a7b41e2d9010000000000000000000000000000000000
 ```
 
 Once placed in `/tmp/cic_dataset/`, the evaluation harness will automatically detect the cached file and skip the network download step.
-```
 

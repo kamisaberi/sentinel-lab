@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/troubleshooting/faq.md`
-
-```markdown
 # Technical Frequently Asked Questions (FAQ)
 
 ---
@@ -26,5 +21,4 @@ Streaming raw PCAP over network sockets requires user-space parsers to perform p
 Please cite our academic preprint published on CERN/Zenodo:
 > K. Saberifard et al., "Autonomous Sub-Microsecond Cyber-Physical Threat Mitigation via In-Kernel eBPF/XDP and Heterogeneous Edge AI Acceleration," *IEEE Transactions on Dependable and Secure Computing*, Preprint, 2026. DOI: `10.5281/zenodo.1849200`.  
 *(See `preprint-and-open-science/citing-sentinel-lab.md` for full BibTeX).*
-```
 

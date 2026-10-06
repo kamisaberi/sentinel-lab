@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/troubleshooting/support.md`
-
-```markdown
 # Academic Support, Contributing & Research Collaboration
 
 ---
@@ -37,5 +32,4 @@ For academic collaborations, joint research grant proposals, or guest university
 * **Lead Systems Architect:** Kamran Saberifard (`github.com/kamisaberi`)
 * **Academic Outreach Office:** `academic@aryorithm.com`
 * **CERN/Zenodo Research Archive:** `https://zenodo.org/record/1849200`
-```
 

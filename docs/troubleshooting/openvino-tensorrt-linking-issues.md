@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/troubleshooting/openvino-tensorrt-linking-issues.md`
-
-```markdown
 # Resolving OpenVINO & TensorRT Dynamic Library Collisions
 
 When compiling or executing the heterogeneous dual-silicon benchmark engine (`sentinel_lab`), dynamic library loaders may fail to find vendor acceleration libraries.
@@ -51,5 +46,4 @@ sudo ldconfig
      ```bash
      export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
      ```
-```
 

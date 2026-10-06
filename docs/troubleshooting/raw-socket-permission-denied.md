@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/troubleshooting/raw-socket-permission-denied.md`
-
-```markdown
 # Raw Socket Capabilities & Execution Boundaries (`CAP_NET_RAW`)
 
 Streaming SLAB frames directly onto network interfaces requires binding to Linux raw packet sockets (`AF_PACKET`, `SOCK_RAW`). Unprivileged users will encounter operational permission faults.
@@ -57,6 +52,5 @@ docker run --rm -it \
     --cap-add=NET_ADMIN \
     --network=host \
     sentinel-lab:latest
-```
 ```
 

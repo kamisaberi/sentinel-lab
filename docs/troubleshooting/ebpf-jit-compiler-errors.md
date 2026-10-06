@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/troubleshooting/ebpf-jit-compiler-errors.md`
-
-```markdown
 # Resolving In-Kernel eBPF & JIT Compilation Errors
 
 This guide addresses errors encountered when compiling `bpf/xdp_filter.c` or loading bytecode into the kernel.
@@ -61,6 +56,5 @@ Ensure your kernel was compiled with `CONFIG_DEBUG_INFO_BTF=y`. On Ubuntu/Debian
 
 ```bash
 sudo apt-get install -y linux-image-$(uname -r)-dbg
-```
 ```
 
