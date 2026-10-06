@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/preprint-and-open-science/open-access-licensing.md`
-
-```markdown
 # Open-Access Licensing & Attribution Framework
 
 `sentinel-lab` is committed to open scientific reproducibility and adheres to open-access software and research licensing models.
@@ -39,5 +34,4 @@ The project is released under two complementary licensing structures:
 
 * **University Research & Theses:** Master's and PhD students may fork, modify, and extend the testbed, incorporate SLAB into university research laboratories, and publish benchmark findings without commercial fees.
 * **Commercial Testbeds:** Hardware manufacturers and industrial vendors may integrate the SLAB protocol into evaluation testbeds to benchmark their silicon coprocessors against standard datasets.
-```
 

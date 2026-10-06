@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/preprint-and-open-science/compiling-latex-paper.md`
-
-```markdown
 # Compiling the IEEE LaTeX Preprint Locally (`paper.tex`)
 
 The preprint manuscript is formatted using standard IEEE Transactions single-column specifications. The complete LaTeX source code, BibTeX reference files, figures, and auto-generated data tables reside in the `paper/` directory.
@@ -67,5 +62,4 @@ latexmk -pdf paper.tex
 ```
 
 The resulting compiled publication PDF is generated at `paper/paper.pdf`.
-```
 

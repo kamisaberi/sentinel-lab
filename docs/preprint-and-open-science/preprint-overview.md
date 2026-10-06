@@ -1,12 +1,3 @@
-### Part 5: Preprint & Open Science Artifacts (`preprint-and-open-science/*`)
-
-This section contains 5 academic research documentation files for `sentinel-lab`: the preprint paper abstract and theoretical findings, the permanent CERN/Zenodo DOI archive specification, local IEEE LaTeX compilation instructions, citation/BibTeX attribution guidelines, and open-access licensing frameworks.
-
----
-
-### File: `sentinel-lab/docs/preprint-and-open-science/preprint-overview.md`
-
-```markdown
 # Academic Preprint: Paper Abstract & Theoretical Formalization
 
 The research testbed and empirical findings in `sentinel-lab` accompany the academic preprint manuscript:  
@@ -59,5 +50,4 @@ $$\Delta t_{\text{mitigate}}^{\text{Sentinel}} = t_{\text{DMA}} + t_{\text{XDP\_
 Where:
 * $\Delta t_{\text{mitigate}}^{\text{Legacy}} \ge 15{,}000\,\text{ns}$ to $50{,}000{,}000\,\text{ns}$ ($15\,\mu\text{s}$ to $50\,\text{ms}$).
 * $\Delta t_{\text{mitigate}}^{\text{Sentinel}} \le 840\,\text{ns}$ ($0.84\,\mu\text{s}$ SLA bound).
-```
 

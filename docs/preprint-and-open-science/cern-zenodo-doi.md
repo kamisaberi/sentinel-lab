@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/preprint-and-open-science/cern-zenodo-doi.md`
-
-```markdown
 # CERN / Zenodo Permanent Citable Archive & DOI
 
 To uphold open-science reproducibility standards and prevent link decay, all research artifacts associated with `sentinel-lab`—including source code, raw timing logs, the SLAB protocol specification, and the compiled preprint PDF—are permanently archived on **CERN / Zenodo**.
@@ -37,6 +32,5 @@ Verify the integrity of downloaded research artifacts using SHA-256 checksums:
 # Download and verify the archived bundle
 curl -fsSL https://zenodo.org/record/1849200/files/sentinel-lab-v1.0.0.tar.gz -o sentinel-lab.tar.gz
 sha256sum sentinel-lab.tar.gz
-```
 ```
 
