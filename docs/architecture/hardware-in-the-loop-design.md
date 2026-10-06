@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/architecture/hardware-in-the-loop-design.md`
-
-```markdown
 # Hardware-in-the-Loop (HIL) Testbed Design
 
 `sentinel-lab` bridges theoretical algorithms and physical network hardware using a **Hardware-in-the-Loop (HIL)** architecture.
@@ -42,5 +37,4 @@
 * **Live Line-Rate Ingestion:** Traffic is transmitted over physical network interface cards (e.g., Intel X520 10GbE or E810 25GbE) rather than software mock queues.
 * **Driver-Level Packet Drops:** Verified by observing the physical hardware drop counters (`ethtool -S eth0 | grep rx_dropped`) on the network controller.
 * **Silicon Isolation:** AI models run directly on physical acceleration coprocessors (Intel Neural Processing Units, NVIDIA Tensor Cores) subjected to real-world PCIe bus transfers.
-```
 

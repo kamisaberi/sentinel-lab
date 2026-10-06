@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/architecture/academic-reproducibility-imperative.md`
-
-```markdown
 # The Academic Reproducibility Crisis in Network Security
 
 Over $85\%$ of published academic papers in machine learning-based network intrusion detection evaluate models using offline CSV datasets (e.g., loading `KDDCup99`, `NSL-KDD`, or `CIC-IDS-2017` into a Python Jupyter Notebook with Pandas and Scikit-Learn). 
@@ -44,5 +39,4 @@ This methodology introduces what `sentinel-lab` defines as the **"CSV Illusion"*
 3. **No Active Mitigation Proof:** Predicting an attack in a notebook provides zero proof that the host operating system can drop the packet before application compromise occurs.
 
 `sentinel-lab` eliminates this disparity by evaluating models on live, streaming network frames under realistic line-rate pressure.
-```
 

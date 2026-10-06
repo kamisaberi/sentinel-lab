@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/architecture/zero-overhead-instrumentation.md`
-
-```markdown
 # Zero-Overhead Performance Instrumentation
 
 In low-latency systems research, profiling latency can alter execution behavior (the "Observer Effect"). Logging timestamps via dynamic allocations or locks introduces latency spikes that corrupt high-percentile distributions ($p99$ and $p99.9$).
@@ -66,5 +61,4 @@ private:
 * **$O(1)$ Execution Cost:** Binned recording executes in **under 4 CPU cycles** ($\approx 1.2\,\text{ns}$).
 * **Zero Mutex Contention:** Atomic relaxation (`memory_order_relaxed`) ensures worker threads do not stall when updating metrics.
 * **Cache Isolation:** Histogram bins reside in contiguous, pre-warmed memory pages, eliminating Level 3 cache eviction during benchmark runs.
-```
 

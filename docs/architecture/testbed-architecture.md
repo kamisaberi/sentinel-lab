@@ -1,12 +1,3 @@
-### Part 2: Research & Systems Engineering Design (`architecture/*`)
-
-This section contains 5 architectural specifications detailing the research principles of `sentinel-lab`: the decoupled C++20 execution engine, the critique of static CSV-based academic evaluations, the hardware-in-the-loop (HIL) validation paradigm, nanosecond measurement physics, and zero-overhead performance instrumentation.
-
----
-
-### File: `sentinel-lab/docs/architecture/testbed-architecture.md`
-
-```markdown
 # Decoupled C++20 Research Engine Architecture & Polling Loop
 
 `sentinel-lab` is engineered as an empirical testbed daemon (`sentinel_lab`) written in ISO C++20. It decouples high-speed raw socket packet reception from neural network evaluation and metric recording, ensuring that hardware benchmarks reflect real-world pipeline throughput.
@@ -103,6 +94,5 @@ void run_benchmark_polling_loop(
 }
 
 } // namespace sentinel::lab
-```
 ```
 

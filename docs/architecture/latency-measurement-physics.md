@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/architecture/latency-measurement-physics.md`
-
-```markdown
 # Microsecond Clock Precision & Latency Measurement Physics
 
 Measuring end-to-end latencies below $1.0\,\mu\text{s}$ requires nanosecond-level instrumentation. Standard operating system calls—such as `gettimeofday()` or `std::chrono::system_clock`—introduce measurement overhead ($15 - 30\,\text{ns}$) and are subject to NTP adjustments.
@@ -56,6 +51,5 @@ namespace sentinel::lab {
 }
 
 } // namespace sentinel::lab
-```
 ```
 
