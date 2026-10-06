@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/comparative-benchmarks/sentinel-vs-snort-3.md`
-
-```markdown
 # Comparative Analysis: Sentinel-Lab vs. Snort 3
 
 Snort 3 incorporates a threaded architecture and the Data Acquisition library (**DAQ**) to process traffic. We evaluated Snort 3 running its official Community and Open rulesets against `sentinel-lab`.
@@ -33,5 +28,4 @@ Snort 3 incorporates a threaded architecture and the Data Acquisition library (*
 ## 2. Rule Evaluation Architecture
 
 Snort 3 evaluates text-based signatures using tree-based pattern matchers. In contrast, `sentinel-lab` models protocol invariants using **statically verified eBPF instructions** and compact neural autoencoders, eliminating repetitive regex evaluations on the fast path.
-```
 

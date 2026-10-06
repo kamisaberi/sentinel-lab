@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/comparative-benchmarks/reproducibility-audit.md`
-
-```markdown
 # Third-Party Reproducibility Audit & Verification Logs
 
 To verify scientific claims, independent research teams from collaborating university laboratories replicated the `sentinel-lab` benchmark suite.
@@ -44,6 +39,5 @@ cd sentinel-lab && mkdir build && cd build && cmake -G Ninja .. && ninja
 
 # 2. Run automated validation harness
 sudo python3 ../examples/run_full_evaluation.py --samples 50000 --batch-size 1
-```
 ```
 

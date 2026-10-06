@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/comparative-benchmarks/latency-cdf-percentiles.md`
-
-```markdown
 # Empirical Latency Cumulative Distribution Functions (CDF)
 
 This document provides empirical Cumulative Distribution Function (CDF) data plotting packet mitigation latencies across $N = 50{,}000$ consecutive CIC-IDS-2017 PortScan evaluation frames.
@@ -42,5 +37,4 @@ This document provides empirical Cumulative Distribution Function (CDF) data plo
 | **$p99$ (SLA Bound)** | **$0.84\,\mu\text{s}$** | $4.80\,\mu\text{s}$ | $14{,}800\,\mu\text{s}$ |
 | **$p99.9$** | **$0.91\,\mu\text{s}$** | $6.20\,\mu\text{s}$ | $22{,}500\,\mu\text{s}$ |
 | **Max Outlier** | **$1.12\,\mu\text{s}$** | $12.40\,\mu\text{s}$ | $48{,}200\,\mu\text{s}$ |
-```
 

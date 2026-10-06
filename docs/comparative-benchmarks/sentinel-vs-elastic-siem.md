@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/comparative-benchmarks/sentinel-vs-elastic-siem.md`
-
-```markdown
 # Comparative Analysis: Sentinel-Lab vs. Elastic SIEM
 
 Elastic SIEM (Elasticsearch, Logstash, Fleet Beats) is widely used for centralized security log analytics. This benchmark evaluates the time delta between threat packet arrival and security mitigation.
@@ -44,5 +39,4 @@ SENTINEL-LAB AUTONOMOUS EDGE MITIGATION (Cumulative: ~0.84 µs):
 ## 2. Strategic Conclusion
 
 Elastic SIEM serves as an effective retrospective search engine for historical compliance auditing. However, for active physical defense—such as stopping a centrifugal over-speed command in an industrial power plant—relying on a 4-second cloud pipeline allows the attack to succeed before the alert is indexed.
-```
 

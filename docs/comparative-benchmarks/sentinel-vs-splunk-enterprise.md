@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/comparative-benchmarks/sentinel-vs-splunk-enterprise.md`
-
-```markdown
 # Resource Utilization: Sentinel-Lab vs. Splunk Enterprise
 
 Splunk Enterprise requires extensive server clusters (Search Heads, Indexers, Heavy Forwarders) to ingest and index high-frequency network flow streams.
@@ -24,5 +19,4 @@ Splunk Enterprise requires extensive server clusters (Search Heads, Indexers, He
 ## 2. Edge Deployability
 
 Splunk Enterprise cannot be deployed on a DIN-rail industrial gateway or edge field computer due to extreme hardware prerequisites. `sentinel-lab` executes comfortably on fanless edge silicon consuming under $15\text{ Watts}$.
-```
 

@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/comparative-benchmarks/sentinel-vs-suricata-7.md`
-
-```markdown
 # Comparative Analysis: Sentinel-Lab vs. Suricata 7.0
 
 Suricata is widely adopted in enterprise and academic networks. In active prevention mode, Suricata relies on the Linux Netfilter queue (**`NFQUEUE`**) to inspect packets in user space and issue drop verdicts.
@@ -35,5 +30,4 @@ Suricata is widely adopted in enterprise and academic networks. In active preven
 1. **Netlink Serialization Overhead:** Every packet must be copied from the kernel ring through Netlink socket buffers into user space.
 2. **Context-Switch Latency:** Passing execution between kernel interrupt handlers and Suricata’s thread pool incurs heavy scheduling penalties ($1.5 - 4.5\,\mu\text{s}$ per switch).
 3. **Queue Backup Under Load:** At line rate, user-space queues overflow, inducing multi-millisecond buffer latency before packet inspection begins.
-```
 
