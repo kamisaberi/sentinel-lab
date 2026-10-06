@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/tutorials/benchmarking-intel-npu-vs-cpu.md`
-
-```markdown
 # Benchmarking Inference Latency: Intel NPU vs. Xeon CPU
 
 This tutorial guides researchers through profiling latency and throughput trade-offs between dedicated edge AI coprocessors (**Intel Core Ultra NPU**) and high-performance server processors (**Intel Xeon AVX-512**).
@@ -73,5 +68,4 @@ python3 compare_silicon.py
 
 ### Research Conclusion
 While the Xeon CPU achieves lower absolute latency ($0.92\,\mu\text{s}$ vs. $8.42\,\mu\text{s}$), the Intel Core Ultra NPU provides a **$46\times$ higher performance-per-watt efficiency**, making it optimal for fanless industrial cabinets.
-```
 

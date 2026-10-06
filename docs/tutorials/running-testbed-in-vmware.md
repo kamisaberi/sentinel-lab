@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/tutorials/running-testbed-in-vmware.md`
-
-```markdown
 # Executing the Research Harness Inside VMware Virtual Machines
 
 Graduate students without access to physical multi-NIC bare-metal servers can execute `sentinel-lab` inside **VMware Workstation Pro, VMware Fusion, or VMware vSphere ESXi**.
@@ -52,6 +47,5 @@ sudo python3 examples/run_full_evaluation.py \
 [*] Attached XDP filter to ens33 in Generic SKB mode.
 [+] Baseline evaluation active: Latency p50: 2.45 µs | F1-Score: 0.9988
 [+] Research harness verified inside virtualized VMware guest!
-```
 ```
 

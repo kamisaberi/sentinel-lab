@@ -1,12 +1,3 @@
-### Part 9: Hands-On Research Walkthroughs & Tutorials (`tutorials/*`)
-
-This section contains 5 practical research tutorials for `sentinel-lab`: evaluating custom university PCAPs, benchmarking Intel Core Ultra NPUs against CPUs, measuring in-kernel eBPF drop cycles with Linux `perf`, exporting publication-ready LaTeX tables, and executing the research testbed inside VMware virtual machines.
-
----
-
-### File: `sentinel-lab/docs/tutorials/evaluating-custom-csv-datasets.md`
-
-```markdown
 # Converting & Evaluating a Custom University Campus PCAP
 
 This tutorial demonstrates how graduate students and researchers can capture raw network traffic from a university campus subnet, extract continuous 32-dimensional flow vectors, serialize them into the SLAB binary wire protocol, and evaluate classification performance.
@@ -84,6 +75,5 @@ sudo ./build/bin/sentinel_lab \
     --model-path models/network_threat_v2.onnx \
     --target-silicon AUTO \
     --export-latex paper/tables/campus_results.tex
-```
 ```
 

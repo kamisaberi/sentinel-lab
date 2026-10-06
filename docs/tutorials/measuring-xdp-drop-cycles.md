@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/tutorials/measuring-xdp-drop-cycles.md`
-
-```markdown
 # Measuring CPU Clock Cycles per Drop with Linux `perf`
 
 To publish hardware-level systems papers, researchers must measure CPU instruction counts and cache behaviors directly from processor Performance Monitoring Units (PMUs).
@@ -54,5 +49,4 @@ sudo python3 harness/socket_injector.py --interface eth0 --rate-limit-eps 60000
 $$\text{Cycles per Drop} = \frac{\Delta \text{Cycles}}{\Delta \text{Packets Dropped}} = \frac{7{,}080{,}000\,\text{cycles}}{60{,}000\,\text{packets}} = 118.0\,\text{Cycles/Packet}$$
 
 This calculation proves that the drop executes within **$118\text{ CPU cycles}$** ($\approx 59\,\text{ns}$ at $2.0\,\text{GHz}$), leaving the remaining $781\,\text{ns}$ of the $0.84\,\mu\text{s}$ budget for physical PCIe DMA bus transfers.
-```
 

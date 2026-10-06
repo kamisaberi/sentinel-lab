@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/tutorials/exporting-reproducible-csv-artifacts.md`
-
-```markdown
 # Formatting Benchmark Outputs for Publication-Ready LaTeX Tables
 
 Scientific reviewers require verifiable empirical outputs. `sentinel-lab` includes an automated metric exporter that transforms raw nanosecond benchmark logs into structured CSVs and publication-formatted LaTeX tables.
@@ -59,5 +54,4 @@ Sentinel-Lab (XDP + NPU) & 99.88\% & 0.9988 & 0.72 & 0.78 & 0.84 & 0.91 \\
 ```
 
 Include this file directly in `paper/paper.tex` via `\input{tables/results.tex}` for automated document builds.
-```
 
