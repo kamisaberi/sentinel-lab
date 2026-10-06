@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/dual-silicon-testbed/intel-openvino-pipeline.md`
-
-```markdown
 # Intel OpenVINO NPU & Xeon Evaluation Pipeline
 
 This pipeline evaluates Intel silicon architectures—focusing on the **Intel Core Ultra NPU (Meteor Lake / Lunar Lake)** and **Intel Xeon Scalable Processors (AVX-512)**—integrated via `libxinfer.so` and the OpenVINO C++ runtime.
@@ -63,5 +58,4 @@ private:
 * **Core Ultra 7 NPU.3720 Latency ($N=1$, INT8):** **$8.4\,\mu\text{s}$** (Median $p50$).
 * **Intel Xeon 8480+ (AVX-512 SIMD, FP32):** **$0.92\,\mu\text{s}$** (Median $p50$).
 * **NPU Power Draw During Saturation:** $< 6.2\,\text{Watts}$.
-```
 

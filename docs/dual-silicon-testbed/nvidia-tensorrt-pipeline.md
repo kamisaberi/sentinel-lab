@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/dual-silicon-testbed/nvidia-tensorrt-pipeline.md`
-
-```markdown
 # NVIDIA TensorRT CUDA Stream Evaluation Pipeline
 
 This pipeline measures inference execution across NVIDIA edge and datacenter silicon—including the **Jetson Orin Nano, AGX Orin, RTX A4000, and NVIDIA L4**—using TensorRT 10.x and asynchronous CUDA streams.
@@ -88,5 +83,4 @@ private:
 * **Jetson AGX Orin (INT8, Tensor Cores):** **$3.8\,\mu\text{s}$** (Median $p50$).
 * **NVIDIA L4 Enterprise GPU (INT8, CUDA Graph):** **$1.8\,\mu\text{s}$** (Median $p50$).
 * **Jitter Profile:** Standard deviation $\sigma < 0.12\,\mu\text{s}$.
-```
 

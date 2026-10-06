@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/dual-silicon-testbed/thermal-and-power-profiling.md`
-
-```markdown
 # Thermal & Power Consumption Profiling (Joules per Classification)
 
 In industrial field hardware, edge devices operate under strict power and thermal budgets. Evaluating models solely by inference speed ignores energy efficiency.
@@ -53,5 +48,4 @@ Workload: **32-dimensional Tabular Threat Autoencoder** ($N=1$, Sustained 50k Pa
 
 * **Embedded ARM/NPU Silicon Leads Energy Efficiency:** The Rockchip RK3588 and NVIDIA Jetson deliver up to **$46{,}940\text{ classifications per Joule}$**, making them suitable for solar-powered or battery-backed field nodes.
 * **Server CPUs Prioritize Raw Speed:** While the Intel Xeon CPU achieves the lowest absolute latency ($0.92\,\mu\text{s}$), it consumes $\sim 5\times$ more energy per classification than integrated NPU coprocessors.
-```
 

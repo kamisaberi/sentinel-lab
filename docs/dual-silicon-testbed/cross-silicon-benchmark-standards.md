@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/dual-silicon-testbed/cross-silicon-benchmark-standards.md`
-
-```markdown
 # Cross-Silicon Normalization Standards & Benchmarking Rules
 
 To ensure academic validity under peer-review standards, `sentinel-lab` enforces six benchmarking rules across all silicon evaluations.
@@ -27,5 +22,4 @@ To ensure academic validity under peer-review standards, `sentinel-lab` enforces
 In many academic papers, Python garbage collection or global interpreter lock (GIL) contention introduces latency spikes of $500 - 2000\,\mu\text{s}$. 
 
 `sentinel-lab` benchmarks run entirely in **compiled ISO C++20**, eliminating runtime garbage collection pauses and ensuring measurement reproducibility.
-```
 
