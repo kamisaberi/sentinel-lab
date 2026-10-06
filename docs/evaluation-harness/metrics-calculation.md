@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/evaluation-harness/metrics-calculation.md`
-
-```markdown
 # Scientific Metrics Calculation & Confusion Matrix Derivation
 
 `sentinel-lab` evaluates edge intrusion detection models using standardized statistical classification metrics, comparing in-kernel mitigation verdicts against the embedded SLAB ground-truth label.
@@ -92,6 +87,5 @@ struct ScientificMetrics {
 };
 
 } // namespace sentinel::lab
-```
 ```
 

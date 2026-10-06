@@ -1,12 +1,3 @@
-### Part 6: Autonomous Evaluation Harness (`evaluation-harness/*`)
-
-This section contains 6 technical implementation guides detailing the automated benchmarking pipeline in `sentinel-lab`: the architecture of `run_full_evaluation.py`, automated CIC-IDS-2017 dataset acquisition, flow normalization math, raw socket packet injection, classification metric derivation, and empirical latency distribution profiling.
-
----
-
-### File: `sentinel-lab/docs/evaluation-harness/harness-architecture.md`
-
-```markdown
 # Autonomous Benchmark Harness Architecture (`run_full_evaluation.py`)
 
 `examples/run_full_evaluation.py` is the primary entry point for executing reproducible scientific benchmarks in `sentinel-lab`. It orchestrates dataset acquisition, flow feature normalization, binary SLAB wire serialization, raw socket packet injection, and empirical metric generation within a single automated pipeline.
@@ -78,5 +69,4 @@ sudo python3 examples/run_full_evaluation.py \
 | `--batch-size` | Integer | `1` | Evaluation batch size ($N=1$ for line-rate fast path). |
 | `--target-silicon` | String | `AUTO` | Silicon backend (`AUTO`, `OPENVINO`, `TENSORRT`). |
 | `--export-latex` | File Path | `paper/tables/results.tex` | Destination for compiled LaTeX table artifact. |
-```
 

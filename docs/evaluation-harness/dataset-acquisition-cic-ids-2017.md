@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/evaluation-harness/dataset-acquisition-cic-ids-2017.md`
-
-```markdown
 # Automated CIC-IDS-2017 PortScan Dataset Acquisition
 
 To eliminate manual downloading and ensure reproducibility across academic testbeds, `sentinel-lab` includes an automated dataset fetcher that pulls the official **PortScan subset of CIC-IDS-2017** directly from the Canadian Institute for Cybersecurity archive.
@@ -60,6 +55,5 @@ def fetch_and_verify_cic_ids_2017(dest_dir: str = "/tmp/cic_dataset") -> Path:
     archive_path.unlink()
     print(f"[+] Extraction complete: {target_csv}")
     return target_csv
-```
 ```
 

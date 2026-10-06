@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/evaluation-harness/flow-normalization-pipeline.md`
-
-```markdown
 # Flow Normalization Pipeline & Continuous Tensor Clamping
 
 Raw network flows contain wide-ranging numerical scales (e.g., flow durations ranging from $10^{-6}$ to $10^8\,\mu\text{s}$, while TCP flag counts range from $0$ to $1$). Feeding unscaled values into edge AI silicon leads to numerical overflow and gradient instability.
@@ -52,6 +47,5 @@ def normalize_flow_matrix(raw_matrix: np.ndarray, mins: np.ndarray, maxs: np.nda
     clamped = np.nan_to_num(clamped, nan=0.0, posinf=1.0, neginf=-1.0)
     
     return clamped.astype(np.float32)
-```
 ```
 

@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/evaluation-harness/percentile-latency-profiler.md`
-
-```markdown
 # Percentile Latency Profiler ($p50$ through $p99.9$)
 
 Evaluating systems on mean latency alone hides tail-latency behavior. In safety-critical cyber-physical networks, rare latency spikes ($p99$ or $p99.9$) cause packet buffer overflows and delayed physical safety interlocks.
@@ -54,5 +49,4 @@ NVIDIA Jetson Orin   & {metrics.f1_score():.4f} & 3.80 & 4.20 & 4.60 & 4.90 & 6.
     with open(output_path, "w") as f:
         f.write(latex_content)
     print(f"[+] LaTeX table generated: {output_path}")
-```
 ```

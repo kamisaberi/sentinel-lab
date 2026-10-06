@@ -1,8 +1,3 @@
----
-
-### File: `sentinel-lab/docs/evaluation-harness/wire-speed-raw-socket-injection.md`
-
-```markdown
 # Wire-Speed Packet Injection via Linux Raw Sockets (`AF_PACKET`)
 
 To evaluate driver-level mitigation realistically, `sentinel-lab` transmits SLAB binary frames over native Linux raw packet sockets (**`AF_PACKET` / `SOCK_RAW`**), sustaining transmission rates exceeding **$60{,}000\text{ packets/second}$** from user space.
@@ -79,6 +74,5 @@ class SlabSocketBlaster:
         elapsed = time.perf_counter() - start_time
         actual_eps = num_samples / elapsed
         print(f"[+] Injection complete: {num_samples} frames in {elapsed:.2f}s ({actual_eps:.1f} EPS)")
-```
 ```
 
