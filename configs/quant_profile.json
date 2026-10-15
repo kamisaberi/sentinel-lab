@@ -1,0 +1,25 @@
+{
+    "quant_profile": {
+        "engine_name": "Multi-Silicon Precision & Quantization Drift Profiler",
+        "fp32_baseline_model": "etc/sentinel/models/network_threat_fp32.onnx",
+        "quant_models": [
+            {
+                "backend": "INTEL_OPENVINO",
+                "precision": "FP16",
+                "path": "etc/sentinel/models/network_threat_fp16.onnx"
+            },
+            {
+                "backend": "NVIDIA_TENSORRT",
+                "precision": "INT8",
+                "path": "etc/sentinel/models/network_threat_int8.engine"
+            },
+            {
+                "backend": "ROCKCHIP_RKNN",
+                "precision": "INT8",
+                "path": "etc/sentinel/models/network_threat_int8.rknn"
+            }
+        ],
+        "min_cosine_similarity": 0.985,
+        "max_rank_inversion_pct": 5.0
+    }
+}
