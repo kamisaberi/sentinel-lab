@@ -1,0 +1,29 @@
+{
+    "fuzzer_profile": {
+        "engine_name": "SCADA Differential Parser Desync Fuzzer",
+        "protocols": [
+            {
+                "name": "MODBUS_TCP",
+                "port": 502
+            },
+            {
+                "name": "S7COMM",
+                "port": 102
+            },
+            {
+                "name": "IEC104",
+                "port": 2404
+            }
+        ],
+        "mutation_strategies": [
+            "MBAP_LENGTH_CORRUPTION",
+            "DUAL_FUNCTION_CODE_CONCATENATION",
+            "COTP_HEADER_TRUNCATION",
+            "TRAILING_PADDING_INSERTION"
+        ],
+        "max_iterations_per_seed": 5000,
+        "oracle": {
+            "flag_desync_when_gateway_passes_and_plc_changes": true
+        }
+    }
+}
