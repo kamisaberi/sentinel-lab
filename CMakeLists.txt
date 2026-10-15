@@ -43,7 +43,9 @@ set(LAB_SOURCES
     src/pmu_profiler.cpp
     src/drift_profiler.cpp
     src/hil_coupler.cpp
+    src/differential_fuzzer.cpp
 )
+
 
 if(ENABLE_OPENVINO)
     add_compile_definitions(SENTINEL_LAB_OPENVINO)
