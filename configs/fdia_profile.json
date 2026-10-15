@@ -1,0 +1,18 @@
+{
+    "fdia_profile": {
+        "engine_name": "Cross-Modal Causal FDIA Evaluation Suite",
+        "attack_signature": "STUXNET_TRITON_CROSS_MODAL_BLINDING",
+        "cyber_channel": {
+            "sensor_id": 100,
+            "spoofed_status": "NORMAL",
+            "spoofed_score_max": 0.15
+        },
+        "physical_channel": {
+            "sensor_id": 101,
+            "modality": "THERMAL",
+            "critical_threshold_celsius": 120.0,
+            "drift_rate_celsius_per_sec": 5.0
+        },
+        "sla_max_tdet_ms": 10.0
+    }
+}
