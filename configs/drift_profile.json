@@ -1,0 +1,14 @@
+{
+    "drift_profile": {
+        "engine_name": "Continual Learning Drift & Catastrophic Forgetting Profiler",
+        "bwt_min_threshold": -0.01,
+        "fwt_min_threshold": 0.00,
+        "evaluation_metric": "RECALL",
+        "task_sequence": [
+            "dist/datasets/threat_stream_2017.slab",
+            "dist/datasets/threat_stream_2020.slab",
+            "dist/datasets/threat_stream_2024.slab"
+        ],
+        "golden_attacks_dataset": "dist/datasets/golden_attacks.slab"
+    }
+}
