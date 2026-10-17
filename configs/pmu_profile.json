@@ -1,0 +1,11 @@
+{
+    "pmu_profile": {
+        "engine_name": "Hardware PMU Microarchitecture Profiler",
+        "track_instructions_per_cycle": true,
+        "track_llc_cache_misses": true,
+        "track_bus_lock_stalls": true,
+        "track_dtlb_misses": true,
+        "ipc_alert_threshold": 0.5,
+        "llc_miss_rate_alert_threshold": 0.15
+    }
+}
