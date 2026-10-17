@@ -47,7 +47,9 @@ set(LAB_SOURCES
     src/fdia_engine.cpp
     src/quant_profiler.cpp
     src/pqc_profiler.cpp
+    src/stateful_fuzzer.cpp
 )
+
 
 if(ENABLE_OPENVINO)
     add_compile_definitions(SENTINEL_LAB_OPENVINO)
