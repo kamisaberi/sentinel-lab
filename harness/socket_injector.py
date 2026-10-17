@@ -2,6 +2,7 @@
 """
 Sentinel-Lab: Wire-Speed Raw Socket Frame Blaster
 Sends SLAB protocol binary frames (0x534C4142) directly to NIC driver rings via AF_PACKET/SOCK_RAW.
+Now includes optional Grammar-Constrained Adversarial Evasion Mutator support.
 """
 
 import sys
@@ -12,6 +13,8 @@ import struct
 import json
 import argparse
 import numpy as np
+
+from adversarial_mutator import AdversarialMutator
 
 SLAB_MAGIC = 0x534C4142
 
@@ -95,6 +98,8 @@ def main():
     parser.add_argument("-r", "--rate-eps", type=int, default=None, help="Target injection rate in EPS")
     parser.add_argument("-c", "--config", type=str, default="configs/benchmark_profile.json", help="Path to benchmark_profile.json")
     parser.add_argument("-d", "--samples", type=int, default=1000, help="Synthetic test sample count")
+    parser.add_argument("--evasion-mode", action="store_true", help="Apply grammar-constrained adversarial evasion noise")
+    parser.add_argument("--epsilon", type=float, default=0.15, help="Epsilon bound for adversarial perturbation")
     args = parser.parse_args()
 
     profile = load_config_profile(args.config)
@@ -105,6 +110,11 @@ def main():
     # Generate synthetic feature tensor (1000 samples, 32 dimensions) for testing
     features = np.random.randn(args.samples, 32).astype(np.float32)
     labels = np.random.choice([0, 1], size=args.samples)
+
+    # Apply grammar-constrained adversarial evasion if flag is set
+    if args.evasion_mode:
+        mutator = AdversarialMutator(config_path="configs/adversarial_profile.json", epsilon=args.epsilon)
+        features = mutator.mutate_features(features, labels)
 
     blaster = SlabSocketBlaster(interface=interface, rate_limit_eps=rate_eps)
     blaster.blast_dataset(features, labels)
