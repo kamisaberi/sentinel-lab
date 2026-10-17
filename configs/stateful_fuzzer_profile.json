@@ -1,0 +1,15 @@
+{
+    "stateful_fuzzer_profile": {
+        "engine_name": "Generative Stateful SCADA Sequence Fuzzer",
+        "target_protocol": "S7COMM",
+        "session_states": [
+            "UNCONNECTED",
+            "COTP_ESTABLISHED",
+            "S7_SESSION_READY",
+            "STEALTH_INJECTION"
+        ],
+        "benign_polling_cycles": 10,
+        "stealth_payload_hex": "320100000001000e00000401120a10020001000084000000",
+        "inter_packet_delay_ms": 100
+    }
+}
