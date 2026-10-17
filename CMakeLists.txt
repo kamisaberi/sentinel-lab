@@ -42,8 +42,8 @@ set(LAB_SOURCES
     src/adversarial_engine.cpp
     src/pmu_profiler.cpp
     src/drift_profiler.cpp
+    src/hil_coupler.cpp
 )
-
 
 if(ENABLE_OPENVINO)
     add_compile_definitions(SENTINEL_LAB_OPENVINO)
