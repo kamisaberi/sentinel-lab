@@ -1,0 +1,15 @@
+{
+    "adversarial_profile": {
+        "profile_name": "Grammar-Constrained Evasion Profile",
+        "epsilon_bound": 0.15,
+        "p_norm": "L_INF",
+        "evasion_strategy": "JITTER_AND_PAYLOAD_DELTA",
+        "preserve_protocol_header": true,
+        "immutable_features": [
+            0,
+            1,
+            2
+        ],
+        "max_jitter_ms": 2.5
+    }
+}
