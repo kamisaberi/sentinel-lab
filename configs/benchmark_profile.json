@@ -1,0 +1,14 @@
+{
+    "benchmark_profile": {
+        "profile_name": "Standard Line-Rate Wire Injection Profile",
+        "interface": "ens160",
+        "target_rate_eps": 60000,
+        "batch_size": 64,
+        "allow_dynamic_dimensions": true,
+        "dataset_path": "dist/datasets/cicids2017_portscan.slab"
+    },
+    "socket_tuning": {
+        "raw_socket_ring_size_mb": 16,
+        "use_zero_copy_af_packet": true
+    }
+}
