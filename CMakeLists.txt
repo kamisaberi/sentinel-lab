@@ -30,8 +30,6 @@ find_library(ELF_LIB elf REQUIRED)
 find_library(XINFER_LIB xinfer REQUIRED PATHS /usr/local/lib /usr/lib)
 find_library(BLACKBOX_LIB blackbox REQUIRED PATHS /usr/local/lib /usr/lib)
 
-
-
 set(LAB_SOURCES
     src/main.cpp
     src/engine.cpp
@@ -48,8 +46,8 @@ set(LAB_SOURCES
     src/differential_fuzzer.cpp
     src/fdia_engine.cpp
     src/quant_profiler.cpp
+    src/pqc_profiler.cpp
 )
-
 
 if(ENABLE_OPENVINO)
     add_compile_definitions(SENTINEL_LAB_OPENVINO)
