@@ -55,3 +55,11 @@ namespace sentinel::lab
     };
 
 } // namespace sentinel::lab
+
+// Namespace bridge for sentinel_lab compatibility
+namespace sentinel_lab
+{
+    using EvtEngine = sentinel::lab::EvtEngine;
+    using EvtResult = sentinel::lab::EvtResult;
+    using EvtConfig = sentinel::lab::EvtConfig;
+}
