@@ -37,6 +37,7 @@ set(LAB_SOURCES
     src/benchmarker.cpp
     src/network_ingest.cpp
     src/rest_api.cpp
+    src/dimension_handshake.cpp
 )
 
 if(ENABLE_OPENVINO)
