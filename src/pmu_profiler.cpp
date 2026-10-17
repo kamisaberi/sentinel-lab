@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <sys/syscall.h>
 #include <linux/perf_event.h>
+#include <sys/ioctl.h>
 
 namespace sentinel_lab
 {
