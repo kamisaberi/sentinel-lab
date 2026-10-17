@@ -40,6 +40,7 @@ set(LAB_SOURCES
     src/dimension_handshake.cpp
     src/evt_engine.cpp
     src/adversarial_engine.cpp
+    src/pmu_profiler.cpp
 )
 
 if(ENABLE_OPENVINO)
