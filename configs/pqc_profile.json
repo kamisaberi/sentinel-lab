@@ -1,0 +1,10 @@
+{
+    "pqc_profile": {
+        "engine_name": "Post-Quantum Cryptography OT Overhead Profiler",
+        "kdf_algorithm": "ML-KEM-768",
+        "sig_algorithm": "ML-DSA-3",
+        "mtu_bytes": 1500,
+        "max_ot_sla_latency_ms": 1.0,
+        "enable_fragmentation_simulation": true
+    }
+}
