@@ -1,0 +1,15 @@
+{
+    "evt_profile": {
+        "engine_name": "Extreme Value Theory WCET Estimator",
+        "target_confidence_level": 0.99999,
+        "block_maxima_size": 1000,
+        "wcet_deadline_ns": 100000,
+        "distribution_type": "GUMBEL",
+        "export_latex_summary": false
+    },
+    "sampling": {
+        "warmup_samples": 5000,
+        "max_tail_samples": 1000000,
+        "high_resolution_clock": "CLOCK_MONOTONIC_RAW"
+    }
+}
