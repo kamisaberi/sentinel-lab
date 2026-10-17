@@ -1,0 +1,10 @@
+{
+    "hil_profile": {
+        "engine_name": "Closed-Loop HIL / ODE Co-Simulation Engine",
+        "integration_dt_sec": 0.01,
+        "max_safe_temperature_c": 120.0,
+        "max_safe_vibration_rpm": 2500.0,
+        "max_safe_pressure_psi": 250.0,
+        "target_tcrit_sla_ms": 50.0
+    }
+}
