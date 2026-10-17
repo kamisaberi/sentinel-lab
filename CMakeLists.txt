@@ -39,6 +39,7 @@ set(LAB_SOURCES
     src/rest_api.cpp
     src/dimension_handshake.cpp
     src/evt_engine.cpp
+    src/adversarial_engine.cpp
 )
 
 if(ENABLE_OPENVINO)
