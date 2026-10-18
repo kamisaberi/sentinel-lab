@@ -1,12 +1,11 @@
 {
     "federated_profile": {
         "engine_name": "Federated AI & Byzantine Poisoning Evaluator",
-        "total_edge_nodes_N": 10,
-        "byzantine_nodes_K": 2,
-        "poisoning_strategy": "GRADIENT_SIGN_FLIP",
+        "num_total_nodes": 5,
+        "num_byzantine_nodes": 1,
+        "poisoning_strategy": "SIGN_FLIP_GRADIENT",
         "aggregation_algorithm": "KRUM",
-        "krum_neighbors": 7,
-        "trimmed_mean_cutoff_pct": 0.2,
-        "max_allowed_pasr_pct": 1.0
+        "max_allowed_pasr_pct": 2.0,
+        "max_allowed_accuracy_loss_pct": 1.0
     }
 }
