@@ -1,0 +1,10 @@
+{
+    "cbf_profile": {
+        "engine_name": "Control Barrier Function (CBF) & Forward Reachability Verifier",
+        "barrier_function_h": "h(x) = 120.0 - temperature",
+        "max_safe_temperature_c": 120.0,
+        "cbf_alpha_gain": 0.5,
+        "reachability_horizon_sec": 5.0,
+        "enforce_strict_forward_invariance": true
+    }
+}
