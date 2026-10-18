@@ -1,0 +1,10 @@
+{
+    "sidechannel_profile": {
+        "engine_name": "Hardware Side-Channel Power/EM Telemetry Correlator",
+        "sampling_rate_mhz": 10.0,
+        "max_em_power_threshold_mw": 450.0,
+        "correlation_window_ms": 100,
+        "min_pearson_correlation_rho": 0.85,
+        "trace_file_path": "dist/datasets/power_em_trace.csv"
+    }
+}
