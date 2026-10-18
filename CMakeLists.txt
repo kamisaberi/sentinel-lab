@@ -51,8 +51,8 @@ set(LAB_SOURCES
     src/sidechannel_correlator.cpp
     src/cbf_verifier.cpp
     src/federated_evaluator.cpp
+    src/patch_regression_engine.cpp
 )
-
 
 if(ENABLE_OPENVINO)
     add_compile_definitions(SENTINEL_LAB_OPENVINO)
