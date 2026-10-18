@@ -1,0 +1,12 @@
+{
+    "patch_regression_profile": {
+        "engine_name": "Automated Exploit Neutralization & Patch Regression Engine",
+        "required_neutralization_rate_pct": 100.0,
+        "max_allowed_throughput_drop_pct": 0.5,
+        "max_allowed_latency_delta_ns": 120,
+        "max_allowed_false_positives": 0,
+        "target_package_id": "org.aryorithm.package.modbus_actuator_guard",
+        "exploit_pcap": "dist/pcaps/industroyer2_substation.pcap",
+        "benign_pcap": "dist/pcaps/benign_modbus_baseline.pcap"
+    }
+}
