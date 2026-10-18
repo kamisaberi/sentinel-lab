@@ -48,6 +48,7 @@ set(LAB_SOURCES
     src/quant_profiler.cpp
     src/pqc_profiler.cpp
     src/stateful_fuzzer.cpp
+    src/sidechannel_correlator.cpp
 )
 
 
