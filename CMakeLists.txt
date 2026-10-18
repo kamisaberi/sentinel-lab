@@ -49,8 +49,8 @@ set(LAB_SOURCES
     src/pqc_profiler.cpp
     src/stateful_fuzzer.cpp
     src/sidechannel_correlator.cpp
+    src/cbf_verifier.cpp
 )
-
 
 if(ENABLE_OPENVINO)
     add_compile_definitions(SENTINEL_LAB_OPENVINO)
