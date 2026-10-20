@@ -1,0 +1,23 @@
+{
+    "matrix_inspector_profile": {
+        "engine_name": "Sentinel-Matrix Live Cyber-Range Inspector Tap",
+        "nexus_endpoint": {
+            "rest_url": "http://10.240.0.10:9443",
+            "stream_url": "http://10.240.0.10:9444/api/v1/telemetry/stream",
+            "poll_interval_ms": 500
+        },
+        "mock_plc_endpoint": {
+            "host": "10.240.0.150",
+            "port": 502,
+            "holding_register_temp": 40002,
+            "holding_register_vibration": 40003,
+            "poll_interval_ms": 250
+        },
+        "safety_thresholds": {
+            "max_safe_temperature_c": 120.0,
+            "target_tcrit_sla_ms": 50.0,
+            "cbf_alpha_gain": 0.5,
+            "max_drop_latency_sla_us": 100.0
+        }
+    }
+}
