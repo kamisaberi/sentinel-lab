@@ -52,6 +52,7 @@ set(LAB_SOURCES
     src/cbf_verifier.cpp
     src/federated_evaluator.cpp
     src/patch_regression_engine.cpp
+    src/matrix_inspector.cpp
 )
 
 if(ENABLE_OPENVINO)
