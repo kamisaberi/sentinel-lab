@@ -3,8 +3,8 @@
 [![C++20](https://img.shields.io/badge/Language-C%2B%2B20-blue.svg)](https://en.cppreference.com/w/cpp/20)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-green.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-Proprietary%20%2F%20Academic-orange.svg)](#license)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10892341.svg)](https://doi.org/10.5281/zenodo.10892341)
 [![Ecosystem](https://img.shields.io/badge/Ecosystem-Aryorithm%20Sentinel-cyan.svg)](https://aryorithm.com)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23598779.svg)](https://doi.org/10.5281/zenodo.23598779)
 
 **`sentinel-lab`** is the Tier 5 scientific research testbed and experimental validation engine of the **Aryorithm Blackbox Sentinel** active defense platform. It transforms cybersecurity research from slow, static CSV/PCAP offline analysis into an **air-gapped, hardware-aware, closed-loop cyber-physical evaluation suite**.
 
