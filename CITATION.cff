@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you utilize Sentinel-Lab or Sentinel-Bench in your academic research, papers, or lab courses, please cite it as below."
+title: "Sentinel-Bench: A 14-Dimensional Unified Benchmark Standard for Hardware-Aware, Closed-Loop CPS Active Defense"
+version: 2.5.0
+doi: 10.5281/zenodo.10892341
+date-released: 2026-10-21
+url: "https://aryorithm.com"
+repository-code: "https://github.com/kamisaberi/sentinel-lab"
+authors:
+  - family-names: "Saberifard"
+    given-names: "Kamran"
+    orcid: "https://orcid.org/0009-0000-0000-0000"
+    affiliation: "Aryorithm Technologies B.V., Amsterdam, The Netherlands"
+keywords:
+  - "cyber-physical systems"
+  - "active defense"
+  - "eBPF"
+  - "AF_XDP"
+  - "industrial control systems"
+  - "benchmarking"
+  - "5G network slicing"
+  - "reproducibility"
