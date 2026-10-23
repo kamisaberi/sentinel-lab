@@ -156,8 +156,8 @@ If your research utilizes Sentinel-Lab, please cite the permanent Zenodo preprin
   author={Saberifard, Kamran},
   journal={CERN / Zenodo Digital Repository},
   year={2026},
-  doi={10.5281/zenodo.10892341},
-  url={https://doi.org/10.5281/zenodo.10892341}
+  doi={10.5281/zenodo.23598779},
+  url={https://doi.org/10.5281/zenodo.23598779}
 }
 ```
 
