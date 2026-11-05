@@ -1,19 +1,11 @@
 # Preprint & Open Science
 
-> **Status:** Draft — placeholder content. Final technical prose is forthcoming.
+`sentinel-lab` accompanies an open-access IEEE Transactions preprint, providing permanent CERN/Zenodo archival and citable DOIs.
 
-Section overview for Preprint & Open Science — start with any guide below.
+## Section Navigation
 
-- [CERN / Zenodo DOI](./cern-zenodo-doi.md)
-
-- [Citing Sentinel-Lab](./citing-sentinel-lab.md)
-
-- [Compiling the LaTeX Paper](./compiling-latex-paper.md)
-
-- [Open Access Licensing](./open-access-licensing.md)
-
-- [Preprint Overview](./preprint-overview.md)
-
----
-
-*Part of the sentinel-lab documentation set.*
+- [Preprint Overview](./preprint-overview.md): Abstract, research contributions, and mathematical formalization (Saberifard et al., 2026).
+- [CERN / Zenodo DOI](./cern-zenodo-doi.md): Permanent digital object identifier (`10.5281/zenodo.1849200`) and FAIR data compliance.
+- [Compiling LaTeX Paper](./compiling-latex-paper.md): Building `paper/paper.tex` locally using TeX Live and `latexmk`.
+- [Citing Sentinel-Lab](./citing-sentinel-lab.md): BibTeX entries and plain-text citation styles for university dissertations.
+- [Open-Access Licensing](./open-access-licensing.md): Dual-licensing model (MIT for code; CC-BY-4.0 for data and paper).

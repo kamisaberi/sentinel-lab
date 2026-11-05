@@ -1,19 +1,11 @@
-# Tutorials
+# Tutorials & Walkthroughs
 
-> **Status:** Draft — placeholder content. Final technical prose is forthcoming.
+Hands-on tutorials demonstrating research evaluation workflows in `sentinel-lab`.
 
-Section overview for Tutorials — start with any guide below.
+## Section Navigation
 
-- [Benchmarking Intel NPU vs. CPU](./benchmarking-intel-npu-vs-cpu.md)
-
-- [Evaluating Custom CSV Datasets](./evaluating-custom-csv-datasets.md)
-
-- [Exporting Reproducible CSV Artifacts](./exporting-reproducible-csv-artifacts.md)
-
-- [Measuring XDP Drop Cycles](./measuring-xdp-drop-cycles.md)
-
-- [Running the Testbed in VMware](./running-testbed-in-vmware.md)
-
----
-
-*Part of the sentinel-lab documentation set.*
+- [Custom CSV Evaluation](./tutorials/evaluating-custom-csv-datasets.md): Converting and evaluating custom university campus PCAP captures.
+- [Intel NPU vs. CPU](./tutorials/benchmarking-intel-npu-vs-cpu.md): Profiling latency and energy trade-offs between Intel Core Ultra NPU and Xeon CPU.
+- [Measuring XDP Drop Cycles](./tutorials/measuring-xdp-drop-cycles.md): Using Linux `perf` to prove sub-120 CPU cycle packet drops.
+- [Exporting LaTeX Tables](./tutorials/exporting-reproducible-csv-artifacts.md): Formatting raw benchmark logs into publication-ready LaTeX tables.
+- [Running in VMware](./tutorials/running-testbed-in-vmware.md): Executing the research harness inside VMware virtual machines.
