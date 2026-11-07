@@ -57,6 +57,7 @@ set(LAB_SOURCES
     src/rf_sdr.cpp
     src/acoustic_tdoa.cpp
     src/fluid_shock.cpp
+    src/space_avionics.cpp
 )
 
 if(ENABLE_OPENVINO)
