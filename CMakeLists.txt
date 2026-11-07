@@ -53,6 +53,8 @@ set(LAB_SOURCES
     src/federated_evaluator.cpp
     src/patch_regression_engine.cpp
     src/matrix_inspector.cpp
+    src/sensor_audit.cpp
+    src/rf_sdr.cpp
 )
 
 if(ENABLE_OPENVINO)
