@@ -56,6 +56,7 @@ set(LAB_SOURCES
     src/sensor_audit.cpp
     src/rf_sdr.cpp
     src/acoustic_tdoa.cpp
+    src/fluid_shock.cpp
 )
 
 if(ENABLE_OPENVINO)
