@@ -59,6 +59,7 @@ set(LAB_SOURCES
     src/fluid_shock.cpp
     src/space_avionics.cpp
     src/quantum_metrology.cpp
+    src/power_grid.cpp
 )
 
 if(ENABLE_OPENVINO)
