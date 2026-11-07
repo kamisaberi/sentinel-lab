@@ -60,6 +60,7 @@ set(LAB_SOURCES
     src/space_avionics.cpp
     src/quantum_metrology.cpp
     src/power_grid.cpp
+    src/chemical_gas.cpp
 )
 
 if(ENABLE_OPENVINO)
