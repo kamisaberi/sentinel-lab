@@ -58,6 +58,7 @@ set(LAB_SOURCES
     src/acoustic_tdoa.cpp
     src/fluid_shock.cpp
     src/space_avionics.cpp
+    src/quantum_metrology.cpp
 )
 
 if(ENABLE_OPENVINO)
