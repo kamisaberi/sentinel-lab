@@ -55,6 +55,7 @@ set(LAB_SOURCES
     src/matrix_inspector.cpp
     src/sensor_audit.cpp
     src/rf_sdr.cpp
+    src/acoustic_tdoa.cpp
 )
 
 if(ENABLE_OPENVINO)
