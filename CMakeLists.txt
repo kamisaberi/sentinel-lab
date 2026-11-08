@@ -61,6 +61,7 @@ set(LAB_SOURCES
     src/quantum_metrology.cpp
     src/power_grid.cpp
     src/chemical_gas.cpp
+    src/fab_extreme.cpp
 )
 
 if(ENABLE_OPENVINO)
