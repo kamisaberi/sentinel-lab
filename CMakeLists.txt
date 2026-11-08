@@ -62,6 +62,7 @@ set(LAB_SOURCES
     src/power_grid.cpp
     src/chemical_gas.cpp
     src/fab_extreme.cpp
+    src/marine_subsea.cpp
 )
 
 if(ENABLE_OPENVINO)
