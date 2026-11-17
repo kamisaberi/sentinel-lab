@@ -23,7 +23,7 @@ services:
       context: .
       dockerfile_inline: |
         FROM python:3.10-slim
-        RUN pip install --no-cache-dir pymodbus
+        RUN pip install pymodbus
     container_name: sim-scada-plc
     networks:
       sentinel_lab_net:
